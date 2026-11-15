@@ -95,7 +95,7 @@
       line-height: 1.1;
     }
 
-    /* 主副標題設計：放到最大 */
+    /* 主副標題設計 */
     header { text-align: center; margin-bottom: 14px; width: 100%; max-width: 520px; }
     h1 {
       font-size: clamp(46px, 13.5vw, 60px);
@@ -114,7 +114,7 @@
       text-shadow: 0 2px 6px rgba(220, 38, 38, 0.18);
     }
 
-    /* 區塊卡片共通樣式：縮減左右內距把空間留給大字 */
+    /* 區塊卡片共通樣式 */
     .app-card {
       width: 100%;
       max-width: 520px;
@@ -143,7 +143,7 @@
       margin-bottom: 16px;
     }
 
-    /* 備忘錄四大類：字體放到最大且絕不出框 */
+    /* 備忘錄四大類：按下直接錄音 */
     .memo-box {
       border: 4px solid transparent;
       font-size: clamp(28px, 8.2vw, 36px);
@@ -165,10 +165,10 @@
     }
     .memo-box span.icon { font-size: clamp(42px, 11vw, 52px); line-height: 1; }
 
-    .cat-med { background-color: #FFE4E6; border-color: #FDA4AF; color: #BE123C; }
+    .cat-daily { background-color: #F3E8FF; border-color: #E9D5FF; color: #7E22CE; }
     .cat-hosp { background-color: #E0F2FE; border-color: #BAE6FD; color: #0369A1; }
     .cat-fit { background-color: #DCFCE7; border-color: #BBF7D0; color: #15803D; }
-    .cat-daily { background-color: #F3E8FF; border-color: #E9D5FF; color: #7E22CE; }
+    .cat-med { background-color: #FFE4E6; border-color: #FDA4AF; color: #BE123C; }
 
     .memo-box.active {
       outline: 5px solid #0F172A;
@@ -177,7 +177,111 @@
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
     }
 
-    /* 銀髮生活區按鈕：字體放到最大且絕不出框 */
+    /* 錄音進行中按鈕發光動畫 */
+    .memo-box.recording-card {
+      background-color: #FEE2E2 !important;
+      border-color: #DC2626 !important;
+      color: #B91C1C !important;
+      animation: pulseCard 1.2s infinite;
+    }
+    @keyframes pulseCard {
+      0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+      70% { box-shadow: 0 0 0 14px rgba(220, 38, 38, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+    }
+
+    /* 錄音狀態大字提示橫幅 */
+    .mic-status-banner {
+      display: none;
+      background-color: #FEF2F2;
+      border: 3px solid #EF4444;
+      border-radius: 16px;
+      padding: 12px 10px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .mic-status-text {
+      font-size: clamp(22px, 6.2vw, 27px);
+      color: #DC2626;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .stop-rec-btn {
+      background-color: #DC2626;
+      color: #FFFFFF;
+      border: none;
+      font-size: clamp(22px, 6vw, 26px);
+      font-weight: 900;
+      padding: 10px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    /* 純打字輸入區（已移除麥克風圖示） */
+    .sub-input-label {
+      font-size: clamp(26px, 7.5vw, 32px);
+      color: #1E293B;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+    .text-input-full {
+      width: 100%;
+      background-color: #F8FAFC;
+      border: 3px solid #CBD5E1;
+      border-radius: 14px;
+      color: #0F172A;
+      font-size: clamp(24px, 6.8vw, 30px);
+      font-weight: 900;
+      padding: 16px 12px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    .text-input-full:focus { border-color: #0284C7; background-color: #FFFFFF; }
+
+    /* 特大字手動鬧鐘按鈕（點開彈出超大數字盤） */
+    .alarm-trigger-btn {
+      width: 100%;
+      background-color: #F8FAFC;
+      border: 3px solid #64748B;
+      border-radius: 16px;
+      padding: 16px 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 8px;
+    }
+    .alarm-trigger-label {
+      font-size: clamp(24px, 6.8vw, 30px);
+      color: #1E293B;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .alarm-trigger-value {
+      font-size: clamp(26px, 7.4vw, 34px);
+      color: #0284C7;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .add-btn {
+      width: 100%;
+      background: linear-gradient(145deg, #0284C7, #0369A1);
+      border: none;
+      color: #FFFFFF;
+      font-size: clamp(26px, 7.5vw, 34px);
+      font-weight: 900;
+      padding: 18px 8px;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+      white-space: nowrap;
+    }
+
+    /* 銀髮生活區按鈕 */
     .life-box {
       border: 4px solid transparent;
       font-size: clamp(25px, 7.2vw, 32px);
@@ -214,7 +318,6 @@
     .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
     .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
 
-    /* 居家無障礙上下按鈕樣式：字放到最大 */
     .sub-link-stack {
       display: flex;
       flex-direction: column;
@@ -236,122 +339,7 @@
       white-space: nowrap;
     }
 
-    /* 輸入區：字體放到最大 */
-    .sub-input-label {
-      font-size: clamp(26px, 7.5vw, 32px);
-      color: #1E293B;
-      margin-top: 6px;
-      margin-bottom: 10px;
-      font-weight: 900;
-    }
-    .input-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-      width: 100%;
-    }
-    .text-input {
-      flex: 1;
-      min-width: 0;
-      background-color: #F8FAFC;
-      border: 3px solid #CBD5E1;
-      border-radius: 14px;
-      color: #0F172A;
-      font-size: clamp(24px, 6.8vw, 30px);
-      font-weight: 900;
-      padding: 16px 10px;
-      outline: none;
-    }
-    .text-input:focus { border-color: #0284C7; background-color: #FFFFFF; }
-    
-    .mic-btn-main {
-      width: 78px;
-      background: linear-gradient(145deg, #16A34A, #15803D);
-      border: 3px solid #86EFAC;
-      border-radius: 16px;
-      color: #FFF;
-      font-size: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      flex-shrink: 0;
-    }
-    .mic-btn-main.recording {
-      background: linear-gradient(145deg, #DC2626, #B91C1C);
-      border-color: #FECACA;
-      animation: pulse 1.2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
-      70% { box-shadow: 0 0 0 16px rgba(220, 38, 38, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-    }
-
-    .mic-tip {
-      font-size: clamp(20px, 5.5vw, 24px);
-      color: #DC2626;
-      font-weight: 900;
-      margin-bottom: 12px;
-      min-height: 24px;
-      text-align: center;
-      line-height: 1.3;
-    }
-
-    /* 極簡純數字大字鬧鐘設定區 */
-    .alarm-box {
-      background-color: #F8FAFC;
-      border: 3px solid #CBD5E1;
-      border-radius: 16px;
-      padding: 12px 10px;
-      margin-bottom: 16px;
-    }
-    .alarm-header {
-      font-size: clamp(26px, 7.5vw, 32px);
-      color: #1E293B;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-    .select-time-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      width: 100%;
-    }
-    .big-select {
-      flex: 1;
-      min-width: 0;
-      background-color: #FFFFFF;
-      border: 3px solid #64748B;
-      border-radius: 14px;
-      color: #0F172A;
-      font-size: clamp(26px, 7.4vw, 34px);
-      font-weight: 900;
-      padding: 14px 4px;
-      text-align: center;
-      text-align-last: center;
-      outline: none;
-    }
-    .big-select:focus {
-      border-color: #0284C7;
-    }
-
-    .add-btn {
-      width: 100%;
-      background: linear-gradient(145deg, #0284C7, #0369A1);
-      border: none;
-      color: #FFFFFF;
-      font-size: clamp(26px, 7.5vw, 34px);
-      font-weight: 900;
-      padding: 18px 8px;
-      border-radius: 16px;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
-      white-space: nowrap;
-    }
-
-    /* 備忘清單區塊：字體放到最大且不出框 */
+    /* 備忘清單區塊 */
     .list-container {
       width: 100%;
       max-width: 520px;
@@ -426,7 +414,7 @@
     .btn-line { background: #06C755; border: 2px solid #05A848; color: #FFFFFF; text-decoration: none; display: block; }
     .btn-del { background: #FFF1F2; border: 2px solid #FECDD3; color: #E11D48; }
 
-    /* 免責聲明區塊：同步加大字體 */
+    /* 免責聲明區塊 */
     .disclaimer-box {
       width: 100%;
       max-width: 520px;
@@ -447,7 +435,7 @@
       margin-bottom: 8px;
     }
 
-    /* 互動有聲教學彈窗：字體放到最大 */
+    /* 通用彈出視窗樣式 */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -455,7 +443,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(15, 23, 42, 0.78);
+      background-color: rgba(15, 23, 42, 0.82);
       z-index: 2000;
       justify-content: center;
       align-items: center;
@@ -469,7 +457,7 @@
       overflow-y: auto;
       border-radius: 24px;
       padding: 20px 14px;
-      border: 4px solid #10B981;
+      border: 4px solid #0284C7;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     }
     .modal-title {
@@ -479,6 +467,50 @@
       text-align: center;
       margin-bottom: 14px;
     }
+
+    /* 特大號數字鬧鐘選擇網格（取代手機超小下拉選單） */
+    .clock-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .clock-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .num-pick-btn {
+      background-color: #F1F5F9;
+      border: 3px solid #CBD5E1;
+      border-radius: 14px;
+      color: #0F172A;
+      font-size: clamp(28px, 8vw, 36px);
+      font-weight: 900;
+      padding: 14px 4px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .num-pick-btn:active, .num-pick-btn.active-num {
+      background-color: #0284C7;
+      border-color: #0369A1;
+      color: #FFFFFF;
+    }
+    .no-alarm-btn {
+      width: 100%;
+      background-color: #FFF1F2;
+      border: 3px solid #FDA4AF;
+      color: #BE123C;
+      font-size: clamp(24px, 6.8vw, 30px);
+      font-weight: 900;
+      padding: 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
+
+    /* 互動教學彈窗按鈕 */
     .play-guide-btn {
       width: 100%;
       background: linear-gradient(145deg, #10B981, #059669);
@@ -490,7 +522,6 @@
       border-radius: 14px;
       cursor: pointer;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
     }
     .step-item {
       background-color: #F8FAFC;
@@ -521,7 +552,7 @@
       padding: 16px 8px;
       border-radius: 14px;
       cursor: pointer;
-      margin-top: 8px;
+      margin-top: 6px;
     }
   </style>
 </head>
@@ -547,84 +578,51 @@
     <div class="sub-title">銀髮備忘錄</div>
   </header>
 
-  <!-- 區塊一：點選要記的事情 -->
+  <!-- 區塊一：點選要記的事情（一般日常與吃藥對調，點選直接自動錄音） -->
   <div class="app-card">
     <div class="section-label">點選要記的事情</div>
 
     <div class="category-grid-2x">
-      <button class="memo-box cat-med active" onclick="selectCat('吃藥', this)">
-        <span class="icon">💊</span>
-        <span>吃藥</span>
-      </button>
-      <button class="memo-box cat-hosp" onclick="selectCat('回診', this)">
-        <span class="icon">🏥</span>
-        <span>回診</span>
-      </button>
-      <button class="memo-box cat-fit" onclick="selectCat('運動健身', this)">
-        <span class="icon">🏃</span>
-        <span>運動健身</span>
-      </button>
-      <button class="memo-box cat-daily" onclick="selectCat('一般日常', this)">
+      <!-- 第一格改為：一般日常 -->
+      <button class="memo-box cat-daily active" id="btn-cat-daily" onclick="selectAndRecord('一般日常', this)">
         <span class="icon">📝</span>
         <span>一般日常</span>
       </button>
+
+      <!-- 第二格：回診 -->
+      <button class="memo-box cat-hosp" id="btn-cat-hosp" onclick="selectAndRecord('回診', this)">
+        <span class="icon">🏥</span>
+        <span>回診</span>
+      </button>
+
+      <!-- 第三格：運動健身 -->
+      <button class="memo-box cat-fit" id="btn-cat-fit" onclick="selectAndRecord('運動健身', this)">
+        <span class="icon">🏃</span>
+        <span>運動健身</span>
+      </button>
+
+      <!-- 第四格改為：吃藥 -->
+      <button class="memo-box cat-med" id="btn-cat-med" onclick="selectAndRecord('吃藥', this)">
+        <span class="icon">💊</span>
+        <span>吃藥</span>
+      </button>
     </div>
 
-    <div class="sub-input-label">說話或打字輸入：</div>
-    <div class="input-row">
-      <input type="text" id="note-input" class="text-input" placeholder="例如：吃降血壓藥">
-      <button class="mic-btn-main" id="mic-btn" onclick="toggleRecord()" title="按一下用講的">🎙️</button>
+    <!-- 錄音進行中提示橫幅（按下分類後自動出現） -->
+    <div class="mic-status-banner" id="mic-banner">
+      <div class="mic-status-text" id="mic-tip">🔴 正在錄音...</div>
+      <button type="button" class="stop-rec-btn" onclick="stopRecord()">⏹️ 講完了（停止錄音）</button>
     </div>
-    <div class="mic-tip" id="mic-tip"></div>
 
-    <!-- 極簡純數字大字鬧鐘設定區 -->
-    <div class="alarm-box">
-      <div class="alarm-header">⏰ 提醒時間：</div>
-      <div class="select-time-row">
-        <select id="alarm-hour" class="big-select">
-          <option value="">不設鬧鐘</option>
-          <option value="00">00 時</option>
-          <option value="01">01 時</option>
-          <option value="02">02 時</option>
-          <option value="03">03 時</option>
-          <option value="04">04 時</option>
-          <option value="05">05 時</option>
-          <option value="06">06 時</option>
-          <option value="07">07 時</option>
-          <option value="08">08 時</option>
-          <option value="09">09 時</option>
-          <option value="10">10 時</option>
-          <option value="11">11 時</option>
-          <option value="12">12 時</option>
-          <option value="13">13 時</option>
-          <option value="14">14 時</option>
-          <option value="15">15 時</option>
-          <option value="16">16 時</option>
-          <option value="17">17 時</option>
-          <option value="18">18 時</option>
-          <option value="19">19 時</option>
-          <option value="20">20 時</option>
-          <option value="21">21 時</option>
-          <option value="22">22 時</option>
-          <option value="23">23 時</option>
-        </select>
+    <!-- 純打字輸入框（已拿掉麥克風圖示） -->
+    <div class="sub-input-label">打字輸入：</div>
+    <input type="text" id="note-input" class="text-input-full" placeholder="點上方按鈕直接講，或在此打字">
 
-        <select id="alarm-minute" class="big-select">
-          <option value="00">00 分</option>
-          <option value="05">05 分</option>
-          <option value="10">10 分</option>
-          <option value="15">15 分</option>
-          <option value="20">20 分</option>
-          <option value="25">25 分</option>
-          <option value="30">30 分</option>
-          <option value="35">35 分</option>
-          <option value="40">40 分</option>
-          <option value="45">45 分</option>
-          <option value="50">50 分</option>
-          <option value="55">55 分</option>
-        </select>
-      </div>
-    </div>
+    <!-- 特大字手動鬧鐘按鈕（取代難用的原生小字下拉選單） -->
+    <button type="button" class="alarm-trigger-btn" onclick="openClockModal()">
+      <span class="alarm-trigger-label">⏰ 提醒時間：</span>
+      <span class="alarm-trigger-value" id="alarm-display">不設鬧鐘 ▾</span>
+    </button>
 
     <button class="add-btn" onclick="addNote()">＋ 記下來並設定提醒</button>
   </div>
@@ -700,30 +698,50 @@
     <p>3. <strong>零個資留存安全</strong>：您的所有輸入與備忘紀錄僅儲存於您個人的手機瀏覽器內部，本站不設資料庫、絕不蒐集或上傳任何個人隱私資料。</p>
   </div>
 
+  <!-- 特大號數字鬧鐘設定彈窗（解決手機原生選單數字過小問題） -->
+  <div class="modal-overlay" id="clock-modal" onclick="if(event.target === this) closeClockModal()">
+    <div class="modal-card">
+      <div class="modal-title" id="clock-modal-title">⏰ 請點選「幾點」</div>
+      
+      <!-- 步驟 1：選小時 (00 ~ 23) -->
+      <div id="hour-step-box">
+        <div class="clock-grid-4" id="hour-grid"></div>
+        <button type="button" class="no-alarm-btn" onclick="clearAlarmSetting()">❌ 不設鬧鐘</button>
+      </div>
+
+      <!-- 步驟 2：選分鐘 (00 ~ 55) -->
+      <div id="minute-step-box" style="display:none;">
+        <div class="clock-grid-3" id="minute-grid"></div>
+      </div>
+
+      <button type="button" class="close-modal-btn" onclick="closeClockModal()">取消關閉</button>
+    </div>
+  </div>
+
   <!-- 互動式有聲圖文教學視窗 -->
   <div class="modal-overlay" id="guide-modal" onclick="if(event.target === this) closeGuideModal()">
-    <div class="modal-card">
+    <div class="modal-card" style="border-color: #10B981;">
       <div class="modal-title">📖 美茉莉使用教學</div>
       <button class="play-guide-btn" onclick="playFullVoiceGuide()">🔊 點這裡，語音念給您聽</button>
 
       <div class="step-item">
-        <div class="step-num">第一步：點選分類</div>
-        <div class="step-desc">先點一下【吃藥】、【回診】、【運動健身】或【一般日常】。</div>
+        <div class="step-num">第一步：點按鈕直接開始說話</div>
+        <div class="step-desc">直接點一下【一般日常】、【回診】、【運動健身】或【吃藥】，就會馬上開始錄音！</div>
       </div>
 
       <div class="step-item">
-        <div class="step-num">第二步：按綠色麥克風說話</div>
-        <div class="step-desc">按一下綠色麥克風 🎙️，對著手機慢慢說出要記的事情（有 15 秒可以說），文字會自動跑出來。</div>
+        <div class="step-num">第二步：說出時間自動設鬧鐘</div>
+        <div class="step-desc">只要說出例如「下午三點吃降血壓藥」，系統會自動幫您設定好 15:00 的鬧鐘！</div>
       </div>
 
       <div class="step-item">
-        <div class="step-num">第三步：選幾時幾分並記下來</div>
-        <div class="step-desc">在【提醒時間】選好幾時、幾分，再按藍色按鈕【記下來並設定提醒】。</div>
+        <div class="step-num">第三步：手動選大字鬧鐘並記下</div>
+        <div class="step-desc">也可以點【⏰ 提醒時間】用超大數字挑選幾點幾分，最後按藍色按鈕記下來。</div>
       </div>
 
       <div class="step-item">
         <div class="step-num">第四步：傳給兒女或念出來</div>
-        <div class="step-desc">在下方清單中，按【🔊 念出】可再聽一次，按【📲 LINE兒女】可直接傳給家人看。</div>
+        <div class="step-desc">在清單中按【🔊 念出】可再聽一次，按【📲 LINE兒女】可直接傳給家人看。</div>
       </div>
 
       <button class="close-modal-btn" onclick="closeGuideModal()">我知道了，關閉教學</button>
@@ -731,8 +749,10 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'senior_care_notes_v21';
-    let currentCategory = '吃藥';
+    const STORAGE_KEY = 'senior_care_notes_v22';
+    let currentCategory = '一般日常';
+    let selectedHour = '';
+    let selectedMinute = '00';
     let isRecording = false;
     let recognition = null;
     let notifiedIds = new Set();
@@ -778,42 +798,147 @@
       }
     }
 
-    // 開啟與關閉有聲教學視窗
-    function openGuideModal() {
-      document.getElementById('guide-modal').style.display = 'flex';
-      playFullVoiceGuide();
+    // 2. 初始化特大號數字鬧鐘選擇網格
+    function buildBigClockGrid() {
+      const hourGrid = document.getElementById('hour-grid');
+      let hHtml = '';
+      for (let h = 0; h < 24; h++) {
+        const hh = String(h).padStart(2, '0');
+        hHtml += `<button type="button" class="num-pick-btn" onclick="pickHour('${hh}')">${hh}點</button>`;
+      }
+      hourGrid.innerHTML = hHtml;
+
+      const minGrid = document.getElementById('minute-grid');
+      let mHtml = '';
+      for (let m = 0; m < 60; m += 5) {
+        const mm = String(m).padStart(2, '0');
+        mHtml += `<button type="button" class="num-pick-btn" onclick="pickMinute('${mm}')">${mm}分</button>`;
+      }
+      minGrid.innerHTML = mHtml;
+    }
+    buildBigClockGrid();
+
+    function openClockModal() {
+      document.getElementById('clock-modal-title').innerText = '⏰ 請點選「幾點」';
+      document.getElementById('hour-step-box').style.display = 'block';
+      document.getElementById('minute-step-box').style.display = 'none';
+      document.getElementById('clock-modal').style.display = 'flex';
     }
 
-    function closeGuideModal() {
-      document.getElementById('guide-modal').style.display = 'none';
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+    function pickHour(hh) {
+      selectedHour = hh;
+      document.getElementById('clock-modal-title').innerText = `⏰ 已選 ${hh} 點，請點選「幾分」`;
+      document.getElementById('hour-step-box').style.display = 'none';
+      document.getElementById('minute-step-box').style.display = 'block';
+    }
+
+    function pickMinute(mm) {
+      selectedMinute = mm;
+      updateAlarmDisplay();
+      closeClockModal();
+      speak(`已設定 ${selectedHour} 點 ${selectedMinute} 分`);
+    }
+
+    function clearAlarmSetting() {
+      selectedHour = '';
+      selectedMinute = '00';
+      updateAlarmDisplay();
+      closeClockModal();
+    }
+
+    function closeClockModal() {
+      document.getElementById('clock-modal').style.display = 'none';
+    }
+
+    function updateAlarmDisplay() {
+      const el = document.getElementById('alarm-display');
+      if (!selectedHour) {
+        el.innerText = '不設鬧鐘 ▾';
+        el.style.color = '#0284C7';
+      } else {
+        el.innerText = `${selectedHour}:${selectedMinute} ▾`;
+        el.style.color = '#DC2626';
       }
     }
 
-    function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！第一步，先點選上方要記的事情，例如吃藥或回診。第二步，按一下綠色麥克風，對著手機慢慢說話，文字就會自動打出來。第三步，在提醒時間選好幾時幾分，按藍色按鈕記下來。最後，在下面清單點念出，就能聽見提醒，也能按綠色按鈕傳 LINE 給兒女看喔！";
-      speak(fullText);
+    // 3. 自然語意時間解析器：自動從語音句子抓取「上下午幾點幾分」並設定鬧鐘
+    function parseChineseNumber(str) {
+      if (!str) return NaN;
+      if (/^\d+$/.test(str)) return parseInt(str, 10);
+      const map = { '零':0, '〇':0, '一':1, '二':2, '兩':2, '三':3, '四':4, '五':5, '六':6, '七':7, '八':8, '九':9 };
+      if (str === '十') return 10;
+      if (str.length === 2 && str[0] === '十') return 10 + (map[str[1]] || 0);
+      if (str.length === 2 && str[1] === '十') return (map[str[0]] || 0) * 10;
+      if (str.length === 3 && str[1] === '十') return (map[str[0]] || 0) * 10 + (map[str[2]] || 0);
+      return map[str] !== undefined ? map[str] : NaN;
     }
 
-    // 2. 點選分類
-    function selectCat(cat, btn) {
+    function autoExtractTimeFromSpeech(text) {
+      // 匹配如：(早上/上午/中午/下午/晚上/凌晨)? (數字或中文) (點/時) (半 | 數字分)?
+      const regex = /(凌晨|早上|上午|中午|下午|傍晚|晚上|夜間)?\s*([0-9]{1,2}|[零〇一二兩三四五六七八九十]{1,3})\s*[點時]\s*(半|一刻|三刻|[0-9]{1,2}|[零〇一二兩三四五六七八九十]{1,3})?/;
+      const match = text.match(regex);
+      if (!match) return;
+
+      const period = match[1] || '';
+      let hour = parseChineseNumber(match[2]);
+      const minStr = match[3] || '';
+
+      if (isNaN(hour) || hour < 0 || hour > 24) return;
+
+      // 依據上下午自動換算為準確 24 小時制
+      if ((period === '下午' || period === '傍晚' || period === '晚上' || period === '夜間') && hour < 12) {
+        hour += 12;
+      } else if (period === '中午' && hour >= 1 && hour <= 5) {
+        hour += 12;
+      } else if ((period === '凌晨' || period === '早上' || period === '上午') && hour === 12) {
+        hour = 0;
+      }
+
+      if (hour === 24) hour = 0;
+
+      let minute = 0;
+      if (minStr === '半') minute = 30;
+      else if (minStr === '一刻') minute = 15;
+      else if (minStr === '三刻') minute = 45;
+      else if (minStr) {
+        const parsedM = parseChineseNumber(minStr);
+        if (!isNaN(parsedM) && parsedM >= 0 && parsedM < 60) {
+          minute = parsedM;
+        }
+      }
+
+      selectedHour = String(hour).padStart(2, '0');
+      selectedMinute = String(minute).padStart(2, '0');
+      updateAlarmDisplay();
+    }
+
+    // 4. 點選分類按鈕：直接開始錄音，並明確提示「XX開始錄音」
+    function selectAndRecord(cat, btn) {
+      // 若正在錄音中再按一次同按鈕則停止
+      if (isRecording && currentCategory === cat) {
+        stopRecord();
+        return;
+      }
+
+      if (isRecording) {
+        stopRecord();
+      }
+
       currentCategory = cat;
       document.querySelectorAll('.memo-box').forEach(b => {
-        b.classList.remove('active');
+        b.classList.remove('active', 'recording-card');
       });
       btn.classList.add('active');
 
       const input = document.getElementById('note-input');
-      if (cat === '吃藥') input.placeholder = '例如：吃降血壓藥';
-      else if (cat === '回診') input.placeholder = '例如：三點醫院心臟科';
-      else if (cat === '運動健身') input.placeholder = '例如：公園散步三十分鐘';
-      else if (cat === '一般日常') input.placeholder = '例如：買水果、關瓦斯';
+      if (cat === '吃藥') input.placeholder = '例如：下午三點吃降血壓藥';
+      else if (cat === '回診') input.placeholder = '例如：上午九點心臟科回診';
+      else if (cat === '運動健身') input.placeholder = '例如：晚上七點公園散步';
+      else if (cat === '一般日常') input.placeholder = '例如：下午四點買水果';
 
-      speak(cat);
+      startDirectRecord(cat, btn);
     }
 
-    // 3. 徹底防重複疊字的語音辨識架構
     function createRecognitionInstance() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) return null;
@@ -835,7 +960,10 @@
                 savedPhrases.push(newText);
               }
             }
-            document.getElementById('note-input').value = savedPhrases.join('，');
+            const fullText = savedPhrases.join('，');
+            document.getElementById('note-input').value = fullText;
+            // 即時從語音中抓取上下午時間並自動設鬧鐘
+            autoExtractTimeFromSpeech(fullText);
           }
         }
       };
@@ -858,48 +986,49 @@
         }
         cleanupRecordUI();
         if (e.error !== 'aborted') {
-          document.getElementById('mic-tip').innerText = '沒聽清楚，請再按一次麥克風慢慢說。';
+          document.getElementById('mic-banner').style.display = 'block';
+          document.getElementById('mic-tip').innerText = '沒聽清楚，請再點一次上方按鈕重說。';
         }
       };
 
       return rec;
     }
 
-    function toggleRecord() {
+    function startDirectRecord(cat, btn) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) return alert("您的手機瀏覽器不支援語音辨識，請直接打字。");
+      if (!SpeechRecognition) {
+        speak(cat);
+        return;
+      }
 
-      if (isRecording) {
-        stopRecord();
-      } else {
-        isRecording = true;
-        savedPhrases = [];
-        document.getElementById('note-input').value = '';
-        document.getElementById('mic-tip').innerText = '';
-        
-        const mic = document.getElementById('mic-btn');
-        mic.classList.add('recording');
-        mic.innerText = '🔴';
+      isRecording = true;
+      savedPhrases = [];
+      document.getElementById('note-input').value = '';
+      btn.classList.add('recording-card');
 
-        countdownSec = 15;
-        document.getElementById('mic-tip').innerText = `🔴 正在聽您說話（還有 ${countdownSec} 秒，講完可再按一下）`;
+      const banner = document.getElementById('mic-banner');
+      const tip = document.getElementById('mic-tip');
+      banner.style.display = 'block';
 
-        clearInterval(recordTimer);
-        recordTimer = setInterval(() => {
-          countdownSec--;
-          if (countdownSec > 0 && isRecording) {
-            document.getElementById('mic-tip').innerText = `🔴 正在聽您說話（還有 ${countdownSec} 秒，講完可再按一下）`;
-          } else {
-            stopRecord();
-          }
-        }, 1000);
+      countdownSec = 15;
+      tip.innerText = `🔴 ${cat}開始錄音，請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
 
-        recognition = createRecognitionInstance();
-        try {
-          recognition.start();
-        } catch (e) {
-          cleanupRecordUI();
+      // 簡短提示後立即啟動麥克風（不干擾收音）
+      clearInterval(recordTimer);
+      recordTimer = setInterval(() => {
+        countdownSec--;
+        if (countdownSec > 0 && isRecording) {
+          tip.innerText = `🔴 ${cat}開始錄音，請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
+        } else {
+          stopRecord();
         }
+      }, 1000);
+
+      recognition = createRecognitionInstance();
+      try {
+        recognition.start();
+      } catch (e) {
+        cleanupRecordUI();
       }
     }
 
@@ -914,31 +1043,28 @@
     function cleanupRecordUI() {
       isRecording = false;
       clearInterval(recordTimer);
-      const mic = document.getElementById('mic-btn');
-      mic.classList.remove('recording');
-      mic.innerText = '🎙️';
-      setTimeout(() => {
-        if (!isRecording) {
-          document.getElementById('mic-tip').innerText = '';
-        }
-      }, 2000);
+      document.querySelectorAll('.memo-box').forEach(b => b.classList.remove('recording-card'));
+      document.getElementById('mic-banner').style.display = 'none';
     }
 
-    // 4. 儲存與新增備忘錄
+    // 5. 儲存與新增備忘錄
     function addNote() {
       if (isRecording) stopRecord();
 
       const input = document.getElementById('note-input');
-      const hh = document.getElementById('alarm-hour').value;
-      const mm = document.getElementById('alarm-minute').value;
       const text = input.value.trim();
 
       if (!text) {
-        speak("請先說話或輸入內容喔！");
+        speak("請先點上方按鈕說話，或打字輸入內容喔！");
         return;
       }
 
-      const alarmStr = hh ? `${hh}:${mm}` : '';
+      // 若是純打字輸入，儲存前也再自動檢查一次是否有時間關鍵字
+      if (!selectedHour) {
+        autoExtractTimeFromSpeech(text);
+      }
+
+      const alarmStr = selectedHour ? `${selectedHour}:${selectedMinute}` : '';
       const notes = getNotes();
       const newNote = {
         id: Date.now(),
@@ -952,11 +1078,11 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
 
       input.value = '';
-      document.getElementById('alarm-hour').value = '';
-      document.getElementById('alarm-minute').value = '00';
+      clearAlarmSetting();
       render();
 
-      const confirmMsg = `已經幫您記好啦！${newNote.category}，${newNote.text}`;
+      const timeConfirm = alarmStr ? `，並設定 ${alarmStr} 提醒` : '';
+      const confirmMsg = `已經幫您記好啦！${newNote.category}，${newNote.text}${timeConfirm}`;
       speak(confirmMsg);
     }
 
@@ -970,7 +1096,7 @@
       render();
     }
 
-    // 5. 渲染備忘錄清單
+    // 6. 渲染備忘錄清單
     function render() {
       const listEl = document.getElementById('notes-list');
       const notes = getNotes();
@@ -1006,7 +1132,25 @@
       }).join('');
     }
 
-    // 6. 即時時鐘與鬧鐘
+    // 開啟與關閉有聲教學視窗
+    function openGuideModal() {
+      document.getElementById('guide-modal').style.display = 'flex';
+      playFullVoiceGuide();
+    }
+
+    function closeGuideModal() {
+      document.getElementById('guide-modal').style.display = 'none';
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function playFullVoiceGuide() {
+      const fullText = "歡迎使用美茉莉銀髮備忘錄！第一步，直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，點下去就會馬上開始錄音！第二步，只要說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘！第三步，按藍色大按鈕記下來就完成囉！";
+      speak(fullText);
+    }
+
+    // 7. 即時時鐘與鬧鐘
     function updateClock() {
       const now = new Date();
       const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -1038,7 +1182,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 7. 即時天氣
+    // 8. 即時天氣
     function fetchWeather(lat = 25.04, lon = 121.28) {
       fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
         .then(res => res.json())

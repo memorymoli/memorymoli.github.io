@@ -143,7 +143,7 @@
       margin-bottom: 16px;
     }
 
-    /* 備忘錄四大類：按下直接錄音 */
+    /* 備忘錄四大類：按下先播提示音再自動錄音 */
     .memo-box {
       border: 4px solid transparent;
       font-size: clamp(28px, 8.2vw, 36px);
@@ -309,19 +309,20 @@
       display: block;
     }
 
-    /* 單放一排滿版特大卡片（居家無障礙專用） */
+    /* 單放一排滿版特大卡片（居家無障礙空間諮詢專用） */
     .full-span-box {
       grid-column: span 2;
       background-color: #F8FAFC;
       border: 4px solid #94A3B8;
       color: #0F172A;
-      padding: 18px 12px;
+      padding: 18px 10px;
     }
     .full-span-title {
-      font-size: clamp(30px, 8.8vw, 38px);
+      font-size: clamp(26px, 7.6vw, 34px);
       font-weight: 900;
       line-height: 1.2;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      white-space: nowrap;
     }
     .sub-link-row-2 {
       display: grid;
@@ -348,7 +349,7 @@
     .cat-nou { background-color: #E0E7FF; border-color: #C7D2FE; color: #3730A3; }
     .link-box { background-color: #F8FAFC; border: 3px solid #CBD5E1; color: #1E293B; }
     .cat-fraud { background-color: #FEE2E2; border-color: #FCA5A5; color: #991B1B; }
-    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; } /* 改善建議-暖琥珀金 */
+    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; }
     .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
     .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
 
@@ -647,7 +648,7 @@
 
     <!-- 錄音進行中提示橫幅 -->
     <div class="mic-status-banner" id="mic-banner">
-      <div class="mic-status-text" id="mic-tip">🔴 正在錄音...</div>
+      <div class="mic-status-text" id="mic-tip">🔴 正在準備錄音...</div>
       <button type="button" class="stop-rec-btn" onclick="stopRecord()">⏹️ 講完了（停止錄音）</button>
     </div>
 
@@ -672,7 +673,7 @@
     <div id="notes-list"></div>
   </div>
 
-  <!-- 區塊三：銀髮生活（全部字體放到最大，依指定位置排列） -->
+  <!-- 區塊三：銀髮生活 -->
   <div class="app-card">
     <div class="section-label">銀髮生活</div>
 
@@ -688,9 +689,9 @@
         <span>心靈有方</span>
       </a>
 
-      <!-- 第二排（單放滿版大卡片）：居家無障礙 -->
+      <!-- 第二排（單放滿版大卡片）：居家無障礙空間諮詢 -->
       <div class="life-box full-span-box">
-        <div class="full-span-title">🛠️ 居家無障礙</div>
+        <div class="full-span-title">🛠️ 居家無障礙空間諮詢</div>
         <div class="sub-link-row-2">
           <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#0284C7;">📍 地圖導航</a>
           <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#1877F2;">📘 臉書專頁</a>
@@ -708,7 +709,7 @@
         <span>老當益壯<span class="life-sub-text">(中高齡就業)</span></span>
       </a>
 
-      <!-- 第四排：防詐騙提醒、備忘錄改善建議（並排） -->
+      <!-- 第四排：防詐騙提醒、備忘錄改善建議 -->
       <a href="https://165.npa.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box cat-fraud">
         <span class="icon">🛡️</span>
         <span>防詐騙提醒<span class="life-sub-text">(165 官網)</span></span>
@@ -802,7 +803,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'senior_care_notes_v23';
+    const STORAGE_KEY = 'senior_care_notes_v24';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -839,15 +840,22 @@
       initVoices();
     }
 
-    function speak(text) {
+    // 支援播報結束回呼的語音朗讀函式
+    function speak(text, onEndCallback = null) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         if (energeticGirlVoice) utter.voice = energeticGirlVoice;
         utter.lang = 'zh-TW';
-        utter.rate = 1.05;
+        utter.rate = 1.08;
         utter.pitch = 1.32;
+        if (onEndCallback) {
+          utter.onend = onEndCallback;
+          utter.onerror = onEndCallback;
+        }
         window.speechSynthesis.speak(utter);
+      } else if (onEndCallback) {
+        onEndCallback();
       }
     }
 
@@ -985,7 +993,7 @@
       updateAlarmDisplay();
     }
 
-    // 4. 點選分類按鈕：直接開始錄音
+    // 4. 點選分類按鈕：先念出「XX提醒錄音開始」，提示音結束後自動啟動麥克風
     function selectAndRecord(cat, btn) {
       if (isRecording && currentCategory === cat) {
         stopRecord();
@@ -1000,7 +1008,7 @@
       document.querySelectorAll('.memo-box').forEach(b => {
         b.classList.remove('active', 'recording-card');
       });
-      btn.classList.add('active');
+      btn.classList.add('active', 'recording-card');
 
       const input = document.getElementById('note-input');
       if (cat === '吃藥') input.placeholder = '例如：下午三點吃降血壓藥';
@@ -1008,7 +1016,21 @@
       else if (cat === '運動健身') input.placeholder = '例如：晚上七點公園散步';
       else if (cat === '一般日常') input.placeholder = '例如：下午四點買水果';
 
-      startDirectRecord(cat, btn);
+      const banner = document.getElementById('mic-banner');
+      const tip = document.getElementById('mic-tip');
+      banner.style.display = 'block';
+      tip.innerText = `🔊 ${cat}提醒錄音開始...`;
+
+      let micStarted = false;
+      const launchMic = () => {
+        if (micStarted) return;
+        micStarted = true;
+        startDirectRecord(cat, btn);
+      };
+
+      // 念出「吃藥提醒錄音開始」，念完瞬間開啟麥克風（加上 2.4 秒保險定時器防部分瀏覽器未觸發 onend）
+      speak(`${cat}提醒錄音開始`, launchMic);
+      setTimeout(launchMic, 2400);
     }
 
     function createRecognitionInstance() {
@@ -1067,10 +1089,7 @@
 
     function startDirectRecord(cat, btn) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        speak(cat);
-        return;
-      }
+      if (!SpeechRecognition) return;
 
       isRecording = true;
       savedPhrases = [];
@@ -1082,13 +1101,13 @@
       banner.style.display = 'block';
 
       countdownSec = 15;
-      tip.innerText = `🔴 ${cat}開始錄音，請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
+      tip.innerText = `🔴 請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
 
       clearInterval(recordTimer);
       recordTimer = setInterval(() => {
         countdownSec--;
         if (countdownSec > 0 && isRecording) {
-          tip.innerText = `🔴 ${cat}開始錄音，請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
+          tip.innerText = `🔴 請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
         } else {
           stopRecord();
         }
@@ -1215,7 +1234,7 @@
     }
 
     function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！第一步，直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，點下去就會馬上開始錄音！第二步，只要說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘！第三步，按藍色大按鈕記下來就完成囉！";
+      const fullText = "歡迎使用美茉莉銀髮備忘錄！第一步，直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，聽到提示音後就會馬上開始錄音！第二步，只要說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘！第三步，按藍色大按鈕記下來就完成囉！";
       speak(fullText);
     }
 

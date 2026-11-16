@@ -127,7 +127,7 @@
       overflow: hidden;
     }
     .section-label {
-      font-size: clamp(30px, 8.8vw, 38px);
+      font-size: clamp(32px, 9.2vw, 40px);
       color: #0F172A;
       margin-bottom: 14px;
       font-weight: 900;
@@ -139,7 +139,7 @@
     .category-grid-2x {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 16px;
     }
 
@@ -177,7 +177,6 @@
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
     }
 
-    /* 錄音進行中按鈕發光動畫 */
     .memo-box.recording-card {
       background-color: #FEE2E2 !important;
       border-color: #DC2626 !important;
@@ -218,7 +217,7 @@
       cursor: pointer;
     }
 
-    /* 純打字輸入區（已移除麥克風圖示） */
+    /* 純打字輸入區 */
     .sub-input-label {
       font-size: clamp(26px, 7.5vw, 32px);
       color: #1E293B;
@@ -240,7 +239,7 @@
     }
     .text-input-full:focus { border-color: #0284C7; background-color: #FFFFFF; }
 
-    /* 特大字手動鬧鐘按鈕（點開彈出超大數字盤） */
+    /* 特大字手動鬧鐘按鈕 */
     .alarm-trigger-btn {
       width: 100%;
       background-color: #F8FAFC;
@@ -281,12 +280,12 @@
       white-space: nowrap;
     }
 
-    /* 銀髮生活區按鈕 */
+    /* 銀髮生活區按鈕：字體放到最大，長輩專用超大字級 */
     .life-box {
       border: 4px solid transparent;
-      font-size: clamp(25px, 7.2vw, 32px);
+      font-size: clamp(28px, 8.2vw, 36px);
       font-weight: 900;
-      padding: 14px 4px;
+      padding: 18px 6px;
       border-radius: 18px;
       cursor: pointer;
       display: flex;
@@ -302,42 +301,56 @@
       transition: all 0.2s ease;
       line-height: 1.2;
     }
-    .life-box span.icon { font-size: clamp(38px, 10.5vw, 48px); line-height: 1; }
+    .life-box span.icon { font-size: clamp(42px, 11.5vw, 52px); line-height: 1; }
     .life-sub-text {
-      font-size: clamp(19px, 5.4vw, 24px);
+      font-size: clamp(20px, 5.8vw, 25px);
       font-weight: 900;
       margin-top: 2px;
       display: block;
     }
 
-    .cat-guide { background-color: #FCE7F3; border-color: #FBCFE8; color: #BE185D; }
-    .link-box { background-color: #F8FAFC; border: 3px solid #CBD5E1; color: #1E293B; }
-    .cat-nou { background-color: #E0E7FF; border-color: #C7D2FE; color: #3730A3; }
-    .cat-fraud { background-color: #FEE2E2; border-color: #FCA5A5; color: #991B1B; }
-    .cat-mind { background-color: #CCFBF1; border-color: #99F6E4; color: #0F766E; }
-    .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
-    .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
-
-    .sub-link-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 94%;
-      margin-top: 4px;
+    /* 單放一排滿版特大卡片（居家無障礙專用） */
+    .full-span-box {
+      grid-column: span 2;
+      background-color: #F8FAFC;
+      border: 4px solid #94A3B8;
+      color: #0F172A;
+      padding: 18px 12px;
     }
-    .sub-link-btn {
+    .full-span-title {
+      font-size: clamp(30px, 8.8vw, 38px);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .sub-link-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+    .sub-link-btn-big {
       display: block;
       width: 100%;
       color: #FFFFFF;
-      font-size: clamp(20px, 5.8vw, 25px);
+      font-size: clamp(24px, 6.8vw, 30px);
       font-weight: 900;
-      padding: 10px 2px;
-      border-radius: 10px;
+      padding: 14px 4px;
+      border-radius: 14px;
       text-decoration: none;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
       white-space: nowrap;
     }
+
+    .cat-guide { background-color: #FCE7F3; border-color: #FBCFE8; color: #BE185D; }
+    .cat-mind { background-color: #CCFBF1; border-color: #99F6E4; color: #0F766E; }
+    .cat-nou { background-color: #E0E7FF; border-color: #C7D2FE; color: #3730A3; }
+    .link-box { background-color: #F8FAFC; border: 3px solid #CBD5E1; color: #1E293B; }
+    .cat-fraud { background-color: #FEE2E2; border-color: #FCA5A5; color: #991B1B; }
+    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; } /* 改善建議-暖琥珀金 */
+    .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
+    .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
 
     /* 備忘清單區塊 */
     .list-container {
@@ -468,7 +481,7 @@
       margin-bottom: 14px;
     }
 
-    /* 特大號數字鬧鐘選擇網格（取代手機超小下拉選單） */
+    /* 特大號數字鬧鐘選擇網格 */
     .clock-grid-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -510,7 +523,7 @@
       margin-bottom: 12px;
     }
 
-    /* 互動教學彈窗按鈕 */
+    /* 互動教學與建議回饋彈窗 */
     .play-guide-btn {
       width: 100%;
       background: linear-gradient(145deg, #10B981, #059669);
@@ -522,6 +535,34 @@
       border-radius: 14px;
       cursor: pointer;
       margin-bottom: 16px;
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 130px;
+      background-color: #F8FAFC;
+      border: 3px solid #CBD5E1;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: clamp(24px, 6.8vw, 28px);
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 14px;
+      outline: none;
+    }
+    .send-line-feedback-btn {
+      display: block;
+      width: 100%;
+      background-color: #06C755;
+      color: #FFFFFF;
+      border: none;
+      font-size: clamp(24px, 6.8vw, 30px);
+      font-weight: 900;
+      padding: 16px 8px;
+      border-radius: 14px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      margin-bottom: 10px;
     }
     .step-item {
       background-color: #F8FAFC;
@@ -578,47 +619,43 @@
     <div class="sub-title">銀髮備忘錄</div>
   </header>
 
-  <!-- 區塊一：點選要記的事情（一般日常與吃藥對調，點選直接自動錄音） -->
+  <!-- 區塊一：點選要記的事情 -->
   <div class="app-card">
     <div class="section-label">點選要記的事情</div>
 
     <div class="category-grid-2x">
-      <!-- 第一格改為：一般日常 -->
       <button class="memo-box cat-daily active" id="btn-cat-daily" onclick="selectAndRecord('一般日常', this)">
         <span class="icon">📝</span>
         <span>一般日常</span>
       </button>
 
-      <!-- 第二格：回診 -->
       <button class="memo-box cat-hosp" id="btn-cat-hosp" onclick="selectAndRecord('回診', this)">
         <span class="icon">🏥</span>
         <span>回診</span>
       </button>
 
-      <!-- 第三格：運動健身 -->
       <button class="memo-box cat-fit" id="btn-cat-fit" onclick="selectAndRecord('運動健身', this)">
         <span class="icon">🏃</span>
         <span>運動健身</span>
       </button>
 
-      <!-- 第四格改為：吃藥 -->
       <button class="memo-box cat-med" id="btn-cat-med" onclick="selectAndRecord('吃藥', this)">
         <span class="icon">💊</span>
         <span>吃藥</span>
       </button>
     </div>
 
-    <!-- 錄音進行中提示橫幅（按下分類後自動出現） -->
+    <!-- 錄音進行中提示橫幅 -->
     <div class="mic-status-banner" id="mic-banner">
       <div class="mic-status-text" id="mic-tip">🔴 正在錄音...</div>
       <button type="button" class="stop-rec-btn" onclick="stopRecord()">⏹️ 講完了（停止錄音）</button>
     </div>
 
-    <!-- 純打字輸入框（已拿掉麥克風圖示） -->
+    <!-- 打字輸入框 -->
     <div class="sub-input-label">打字輸入：</div>
     <input type="text" id="note-input" class="text-input-full" placeholder="點上方按鈕直接講，或在此打字">
 
-    <!-- 特大字手動鬧鐘按鈕（取代難用的原生小字下拉選單） -->
+    <!-- 特大字手動鬧鐘按鈕 -->
     <button type="button" class="alarm-trigger-btn" onclick="openClockModal()">
       <span class="alarm-trigger-label">⏰ 提醒時間：</span>
       <span class="alarm-trigger-value" id="alarm-display">不設鬧鐘 ▾</span>
@@ -635,27 +672,32 @@
     <div id="notes-list"></div>
   </div>
 
-  <!-- 區塊三：銀髮生活 -->
+  <!-- 區塊三：銀髮生活（全部字體放到最大，依指定位置排列） -->
   <div class="app-card">
     <div class="section-label">銀髮生活</div>
 
     <div class="category-grid-2x">
-      <!-- 第一排：使用教學、居家無障礙空間諮詢 -->
+      <!-- 第一排（最上面）：使用教學、心靈有方 -->
       <button class="life-box cat-guide" onclick="openGuideModal()">
         <span class="icon">📖</span>
         <span>使用教學</span>
       </button>
 
-      <div class="life-box link-box" style="padding: 12px 4px;">
-        <span class="icon">🛠️</span>
-        <span style="font-size: clamp(22px, 6.2vw, 27px); line-height: 1.2; margin-bottom: 2px;">居家無障礙<br>空間諮詢</span>
-        <div class="sub-link-stack">
-          <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn" style="background:#0284C7;">📍 地圖導航</a>
-          <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn" style="background:#1877F2;">📘 臉書專頁</a>
+      <a href="https://m.youtube.com/@fongyuanacademy" target="_blank" rel="noopener noreferrer" class="life-box cat-mind">
+        <span class="icon">🧘</span>
+        <span>心靈有方</span>
+      </a>
+
+      <!-- 第二排（單放滿版大卡片）：居家無障礙 -->
+      <div class="life-box full-span-box">
+        <div class="full-span-title">🛠️ 居家無障礙</div>
+        <div class="sub-link-row-2">
+          <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#0284C7;">📍 地圖導航</a>
+          <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#1877F2;">📘 臉書專頁</a>
         </div>
       </div>
 
-      <!-- 第二排：終身學習、老當益壯 -->
+      <!-- 第三排：終身學習、老當益壯 -->
       <a href="https://www.nou.edu.tw" target="_blank" rel="noopener noreferrer" class="life-box cat-nou">
         <span class="icon">🎓</span>
         <span>終身學習<span class="life-sub-text">(空中大學)</span></span>
@@ -666,18 +708,18 @@
         <span>老當益壯<span class="life-sub-text">(中高齡就業)</span></span>
       </a>
 
-      <!-- 第三排：防詐騙提醒、心靈有方 -->
+      <!-- 第四排：防詐騙提醒、備忘錄改善建議（並排） -->
       <a href="https://165.npa.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box cat-fraud">
         <span class="icon">🛡️</span>
         <span>防詐騙提醒<span class="life-sub-text">(165 官網)</span></span>
       </a>
 
-      <a href="https://m.youtube.com/@fongyuanacademy" target="_blank" rel="noopener noreferrer" class="life-box cat-mind">
-        <span class="icon">🧘</span>
-        <span>心靈有方</span>
-      </a>
+      <button class="life-box cat-feedback" onclick="openFeedbackModal()">
+        <span class="icon">💬</span>
+        <span style="line-height: 1.15;">備忘錄<br>改善建議</span>
+      </button>
 
-      <!-- 第四排：每日一唱、每日一笑 -->
+      <!-- 第五排：每日一唱、每日一笑 -->
       <a href="https://www.youtube.com/results?search_query=%E5%9C%8B%E8%AA%9E%E8%80%81%E6%AD%8C+%E5%8D%A1%E6%8B%89OK+%E4%BC%B4%E5%94%B1" target="_blank" rel="noopener noreferrer" class="life-box cat-sing">
         <span class="icon">🎤</span>
         <span>每日一唱</span>
@@ -698,23 +740,34 @@
     <p>3. <strong>零個資留存安全</strong>：您的所有輸入與備忘紀錄僅儲存於您個人的手機瀏覽器內部，本站不設資料庫、絕不蒐集或上傳任何個人隱私資料。</p>
   </div>
 
-  <!-- 特大號數字鬧鐘設定彈窗（解決手機原生選單數字過小問題） -->
+  <!-- 特大號數字鬧鐘設定彈窗 -->
   <div class="modal-overlay" id="clock-modal" onclick="if(event.target === this) closeClockModal()">
     <div class="modal-card">
       <div class="modal-title" id="clock-modal-title">⏰ 請點選「幾點」</div>
       
-      <!-- 步驟 1：選小時 (00 ~ 23) -->
       <div id="hour-step-box">
         <div class="clock-grid-4" id="hour-grid"></div>
         <button type="button" class="no-alarm-btn" onclick="clearAlarmSetting()">❌ 不設鬧鐘</button>
       </div>
 
-      <!-- 步驟 2：選分鐘 (00 ~ 55) -->
       <div id="minute-step-box" style="display:none;">
         <div class="clock-grid-3" id="minute-grid"></div>
       </div>
 
       <button type="button" class="close-modal-btn" onclick="closeClockModal()">取消關閉</button>
+    </div>
+  </div>
+
+  <!-- 備忘錄改善建議彈窗 -->
+  <div class="modal-overlay" id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()">
+    <div class="modal-card" style="border-color: #D97706;">
+      <div class="modal-title">💬 備忘錄改善建議</div>
+      <p style="font-size: 22px; color: #334155; font-weight: 800; margin-bottom: 12px; line-height: 1.4;">
+        請寫下您覺得哪裡不好用、或希望增加什麼功能：
+      </p>
+      <textarea id="feedback-input" class="feedback-textarea" placeholder="例如：字可以再大一點、希望增加什麼功能..."></textarea>
+      <button type="button" class="send-line-feedback-btn" onclick="sendFeedbackViaLine()">📲 透過 LINE 傳送建議</button>
+      <button type="button" class="close-modal-btn" onclick="closeFeedbackModal()">關閉視窗</button>
     </div>
   </div>
 
@@ -749,7 +802,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'senior_care_notes_v22';
+    const STORAGE_KEY = 'senior_care_notes_v23';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -861,7 +914,29 @@
       }
     }
 
-    // 3. 自然語意時間解析器：自動從語音句子抓取「上下午幾點幾分」並設定鬧鐘
+    // 改善建議彈窗控制
+    function openFeedbackModal() {
+      document.getElementById('feedback-modal').style.display = 'flex';
+      speak("請輸入您對美茉莉銀髮備忘錄的改善建議。");
+    }
+
+    function closeFeedbackModal() {
+      document.getElementById('feedback-modal').style.display = 'none';
+    }
+
+    function sendFeedbackViaLine() {
+      const text = document.getElementById('feedback-input').value.trim();
+      if (!text) {
+        alert("請先輸入建議內容喔！");
+        return;
+      }
+      const msg = encodeURIComponent(`【美茉莉銀髮備忘錄 - 改善建議】\n建議內容：${text}`);
+      window.open(`https://line.me/R/msg/text/?${msg}`, '_blank', 'noopener,noreferrer');
+      document.getElementById('feedback-input').value = '';
+      closeFeedbackModal();
+    }
+
+    // 3. 自然語意時間解析器
     function parseChineseNumber(str) {
       if (!str) return NaN;
       if (/^\d+$/.test(str)) return parseInt(str, 10);
@@ -874,7 +949,6 @@
     }
 
     function autoExtractTimeFromSpeech(text) {
-      // 匹配如：(早上/上午/中午/下午/晚上/凌晨)? (數字或中文) (點/時) (半 | 數字分)?
       const regex = /(凌晨|早上|上午|中午|下午|傍晚|晚上|夜間)?\s*([0-9]{1,2}|[零〇一二兩三四五六七八九十]{1,3})\s*[點時]\s*(半|一刻|三刻|[0-9]{1,2}|[零〇一二兩三四五六七八九十]{1,3})?/;
       const match = text.match(regex);
       if (!match) return;
@@ -885,7 +959,6 @@
 
       if (isNaN(hour) || hour < 0 || hour > 24) return;
 
-      // 依據上下午自動換算為準確 24 小時制
       if ((period === '下午' || period === '傍晚' || period === '晚上' || period === '夜間') && hour < 12) {
         hour += 12;
       } else if (period === '中午' && hour >= 1 && hour <= 5) {
@@ -912,9 +985,8 @@
       updateAlarmDisplay();
     }
 
-    // 4. 點選分類按鈕：直接開始錄音，並明確提示「XX開始錄音」
+    // 4. 點選分類按鈕：直接開始錄音
     function selectAndRecord(cat, btn) {
-      // 若正在錄音中再按一次同按鈕則停止
       if (isRecording && currentCategory === cat) {
         stopRecord();
         return;
@@ -962,7 +1034,6 @@
             }
             const fullText = savedPhrases.join('，');
             document.getElementById('note-input').value = fullText;
-            // 即時從語音中抓取上下午時間並自動設鬧鐘
             autoExtractTimeFromSpeech(fullText);
           }
         }
@@ -1013,7 +1084,6 @@
       countdownSec = 15;
       tip.innerText = `🔴 ${cat}開始錄音，請說出內容與上下午時間（剩 ${countdownSec} 秒）`;
 
-      // 簡短提示後立即啟動麥克風（不干擾收音）
       clearInterval(recordTimer);
       recordTimer = setInterval(() => {
         countdownSec--;
@@ -1059,7 +1129,6 @@
         return;
       }
 
-      // 若是純打字輸入，儲存前也再自動檢查一次是否有時間關鍵字
       if (!selectedHour) {
         autoExtractTimeFromSpeech(text);
       }

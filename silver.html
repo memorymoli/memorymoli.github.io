@@ -812,7 +812,7 @@
         <span>每日一笑</span>
       </button>
 
-      <!-- 10. 最後一個放：備忘錄改善建議（直連您的 LINE 官方帳號 @052qxowa） -->
+      <!-- 10. 最後一個放：備忘錄改善建議（自動帶入文字至 @052qxowa 官方 LINE） -->
       <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
         <span class="icon">🎙️</span>
         <span>備忘錄改善建議</span>
@@ -846,14 +846,14 @@
     </div>
   </div>
 
-  <!-- 語音錄音版：備忘錄改善建議彈窗（直連 @052qxowa 官方 LINE） -->
+  <!-- 語音錄音版：備忘錄改善建議彈窗（oaMessage 自動將文字帶入 @052qxowa 官方 LINE 聊天室） -->
   <div class="modal-overlay" id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()">
     <div class="modal-card" style="border-color: #06C755;">
       <div class="modal-title">🎙️ 備忘錄改善建議</div>
       <button type="button" id="fb-mic-btn" class="voice-fb-btn" onclick="toggleFeedbackRecord()">🔴 點這裡，用講的說出建議</button>
       <div id="fb-mic-tip" style="font-size: 20px; color: #DC2626; font-weight: 900; text-align: center; margin-bottom: 8px;"></div>
       <textarea id="feedback-input" class="feedback-textarea" placeholder="說話後文字會出現在這裡，也可以打字修改..."></textarea>
-      <button type="button" class="send-line-oa-btn" onclick="sendToOfficialLine()">📲 複製建議並傳到<br>美茉莉官方 LINE</button>
+      <button type="button" class="send-line-oa-btn" onclick="sendToOfficialLine()">📲 傳送到美茉莉官方 LINE</button>
       <button type="button" class="close-modal-btn" onclick="closeFeedbackModal()">關閉視窗</button>
     </div>
   </div>
@@ -889,10 +889,10 @@
   </div>
 
   <script>
-    // 您的美茉莉 LINE 官方帳號連結
-    const OFFICIAL_LINE_URL = "https://line.me/R/ti/p/@052qxowa";
+    // 美茉莉 LINE 官方帳號 ID
+    const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v28';
+    const STORAGE_KEY = 'senior_care_notes_v29';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -1039,7 +1039,7 @@
       }
     }
 
-    // 3. 語音改善建議功能（自動複製並跳轉至 @052qxowa 官方 LINE）
+    // 3. 語音改善建議功能（使用 oaMessage 格式自動將文字帶入 @052qxowa 官方 LINE 聊天室）
     function openFeedbackModal() {
       document.getElementById('feedback-modal').style.display = 'flex';
       document.getElementById('fb-mic-tip').innerText = '';
@@ -1116,19 +1116,14 @@
     function sendToOfficialLine() {
       stopFeedbackRecord();
       const text = document.getElementById('feedback-input').value.trim();
-      const formattedText = text ? `【美茉莉改善建議】\n${text}` : '';
+      const msgContent = text ? `【美茉莉改善建議】\n${text}` : '您好，我想提供美茉莉備忘錄的改善建議：';
+      const encodedMsg = encodeURIComponent(msgContent);
 
-      if (formattedText && navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(formattedText).catch(() => {});
-      }
+      // 使用 oaMessage 格式，開啟聊天室時自動將文字帶入輸入框
+      const oaChatUrl = `https://line.me/R/oaMessage/${OFFICIAL_LINE_ID}/?${encodedMsg}`;
 
-      if (text) {
-        speak("已經幫您複製好建議文字！現在為您打開美茉莉官方 LINE，請在聊天室按貼上並送出喔！");
-      } else {
-        speak("現在為您打開美茉莉官方 LINE 聊天室！");
-      }
-
-      window.open(OFFICIAL_LINE_URL, '_blank', 'noopener,noreferrer');
+      speak("現在為您打開美茉莉官方 LINE，請按右下角傳送箭頭送出喔！");
+      window.open(oaChatUrl, '_blank', 'noopener,noreferrer');
       document.getElementById('feedback-input').value = '';
       closeFeedbackModal();
     }

@@ -637,6 +637,13 @@
       padding: 14px 12px;
       margin-bottom: 12px;
     }
+    .step-item-highlight {
+      background-color: #ECFDF5;
+      border: 3px solid #10B981;
+      border-radius: 16px;
+      padding: 14px 12px;
+      margin-bottom: 12px;
+    }
     .step-num {
       font-size: clamp(24px, 6.8vw, 28px);
       font-weight: 900;
@@ -647,7 +654,7 @@
       font-size: clamp(21px, 6vw, 25px);
       color: #1E293B;
       font-weight: 800;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .close-modal-btn {
       width: 100%;
@@ -846,7 +853,7 @@
     </div>
   </div>
 
-  <!-- 語音錄音版：備忘錄改善建議彈窗（oaMessage 自動將文字帶入 @052qxowa 官方 LINE 聊天室） -->
+  <!-- 語音錄音版：備忘錄改善建議彈窗 -->
   <div class="modal-overlay" id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()">
     <div class="modal-card" style="border-color: #06C755;">
       <div class="modal-title">🎙️ 備忘錄改善建議</div>
@@ -858,11 +865,19 @@
     </div>
   </div>
 
-  <!-- 互動式有聲圖文教學視窗 -->
+  <!-- 互動式有聲圖文教學視窗（已加入「放到手機桌面」教學） -->
   <div class="modal-overlay" id="guide-modal" onclick="if(event.target === this) closeGuideModal()">
     <div class="modal-card" style="border-color: #10B981;">
       <div class="modal-title">📖 美茉莉使用教學</div>
       <button class="play-guide-btn" onclick="playFullVoiceGuide()">🔊 點這裡，語音念給您聽</button>
+
+      <div class="step-item-highlight">
+        <div class="step-num" style="color: #047857;">📱 如何把「美茉莉」放到手機桌面？</div>
+        <div class="step-desc">
+          • <strong>安卓手機 (Chrome)</strong>：點右上角【⋮】三個點 ➔ 選【加到主畫面】➔ 按【新增】即可。<br>
+          • <strong>蘋果 iPhone (Safari)</strong>：點下方中間【↑】分享鈕 ➔ 選【加入主畫面】➔ 按【新增】即可。
+        </div>
+      </div>
 
       <div class="step-item">
         <div class="step-num">第一步：點按鈕直接開始說話</div>
@@ -889,10 +904,9 @@
   </div>
 
   <script>
-    // 美茉莉 LINE 官方帳號 ID
     const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v29';
+    const STORAGE_KEY = 'senior_care_notes_v30';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -908,7 +922,6 @@
     let fbRecognition = null;
     let fbPhrases = [];
 
-    // 每日一笑多樣化題材庫（每次點入隨機抽選不同主題，不重複上一回）
     const LAUGH_TOPICS = [
       "經典搞笑綜藝短劇 爆笑片段",
       "逗趣可愛動物 爆笑合輯",
@@ -1039,7 +1052,7 @@
       }
     }
 
-    // 3. 語音改善建議功能（使用 oaMessage 格式自動將文字帶入 @052qxowa 官方 LINE 聊天室）
+    // 3. 語音改善建議功能
     function openFeedbackModal() {
       document.getElementById('feedback-modal').style.display = 'flex';
       document.getElementById('fb-mic-tip').innerText = '';
@@ -1119,7 +1132,6 @@
       const msgContent = text ? `【美茉莉改善建議】\n${text}` : '您好，我想提供美茉莉備忘錄的改善建議：';
       const encodedMsg = encodeURIComponent(msgContent);
 
-      // 使用 oaMessage 格式，開啟聊天室時自動將文字帶入輸入框
       const oaChatUrl = `https://line.me/R/oaMessage/${OFFICIAL_LINE_ID}/?${encodedMsg}`;
 
       speak("現在為您打開美茉莉官方 LINE，請按右下角傳送箭頭送出喔！");
@@ -1403,7 +1415,7 @@
       }).join('');
     }
 
-    // 開啟與關閉有聲教學視窗
+    // 開啟與關閉有聲教學視窗（包含放到手機桌面的語音教學）
     function openGuideModal() {
       document.getElementById('guide-modal').style.display = 'flex';
       playFullVoiceGuide();
@@ -1417,7 +1429,7 @@
     }
 
     function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！第一步，直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，聽到提示音後就會馬上開始錄音！第二步，只要說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘！第三步，按藍色大按鈕記下來就完成囉！";
+      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點右上角三個點，選加到主畫面再按新增。蘋果手機請點下方中間分享鈕，選加入主畫面再按新增。使用時，只要直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，聽到提示音後就會馬上開始錄音！說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘，最後按藍色大按鈕記下來就完成囉！";
       speak(fullText);
     }
 

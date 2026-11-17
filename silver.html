@@ -330,46 +330,65 @@
       display: block;
     }
 
-    /* 居家無障礙與計程車叫車：垂直卡片內含特大按鈕 */
+    /* 居家無障礙與計程車叫車：嚴格鎖定內部寬度不溢出 */
     .facility-card-full {
       width: 100%;
       background-color: #F8FAFC;
       border: 4px solid #94A3B8;
       color: #0F172A;
-      padding: 18px 12px;
+      padding: 16px 10px;
       border-radius: 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
     }
     .taxi-card-full {
       width: 100%;
       background-color: #FEF9C3;
       border: 4px solid #EAB308;
       color: #713F12;
-      padding: 18px 12px;
+      padding: 16px 10px;
       border-radius: 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
     }
     .facility-title {
-      font-size: clamp(26px, 7.6vw, 34px);
+      font-size: clamp(24px, 7vw, 32px);
       font-weight: 900;
       line-height: 1.2;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       white-space: nowrap;
       text-align: center;
     }
     .sub-link-row-2 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px;
       width: 100%;
+    }
+    .sub-link-btn-half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      color: #FFFFFF;
+      font-size: clamp(21px, 6vw, 28px);
+      font-weight: 900;
+      padding: 14px 4px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      white-space: nowrap;
+      overflow: hidden;
     }
     .sub-link-col-1 {
       display: flex;
@@ -475,25 +494,43 @@
     .btn-line { background: #06C755; border: 2px solid #05A848; color: #FFFFFF; text-decoration: none; display: block; }
     .btn-del { background: #FFF1F2; border: 2px solid #FECDD3; color: #E11D48; }
 
-    /* 免責聲明區塊 */
+    /* 詳細免責聲明、隱私與防詐騙網址宣告區塊 */
     .disclaimer-box {
       width: 100%;
       max-width: 520px;
       background-color: #EAE5DC;
-      border: 2px solid #D6D0C4;
-      border-radius: 16px;
-      padding: 16px 14px;
+      border: 3px solid #C8C0B2;
+      border-radius: 18px;
+      padding: 18px 14px;
       margin-top: 6px;
-      color: #334155;
+      color: #1E293B;
       font-size: clamp(18px, 5vw, 21px);
-      line-height: 1.55;
+      line-height: 1.65;
       font-weight: 600;
     }
     .disclaimer-title {
-      font-size: clamp(21px, 6vw, 25px);
+      font-size: clamp(22px, 6.2vw, 26px);
       font-weight: 900;
       color: #0F172A;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #C8C0B2;
+      padding-bottom: 6px;
+    }
+    .disclaimer-box p {
+      margin-bottom: 10px;
+    }
+    .official-url-badge {
+      display: block;
+      background-color: #FEF2F2;
+      border: 2px solid #DC2626;
+      color: #B91C1C;
+      font-size: clamp(17px, 4.8vw, 20px);
+      font-weight: 900;
+      padding: 8px 10px;
+      border-radius: 10px;
+      margin: 6px 0;
+      word-break: break-all;
+      text-align: center;
     }
 
     /* 通用彈出視窗樣式 */
@@ -756,12 +793,12 @@
         <span>使用教學</span>
       </button>
 
-      <!-- 2. 第二個放居家無障礙空間諮詢 -->
+      <!-- 2. 第二個放居家無障礙空間諮詢（已修正臉書專頁按鈕不再跑出框框） -->
       <div class="facility-card-full">
         <div class="facility-title">🛠️ 居家無障礙空間諮詢</div>
         <div class="sub-link-row-2">
-          <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#0284C7;">📍 地圖導航</a>
-          <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#1877F2;">📘 臉書專頁</a>
+          <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn-half" style="background:#0284C7;">📍 地圖導航</a>
+          <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-half" style="background:#1877F2;">📘 臉書專頁</a>
         </div>
       </div>
 
@@ -807,11 +844,11 @@
         <span>心靈有方</span>
       </a>
 
-      <!-- 8. 倒數第三個放：每日一唱 -->
-      <a href="https://www.youtube.com/results?search_query=%E5%9C%8B%E8%AA%9E%E8%80%81%E6%AD%8C+%E5%8D%A1%E6%8B%89OK+%E4%BC%B4%E5%94%B1" target="_blank" rel="noopener noreferrer" class="life-box-full cat-sing">
+      <!-- 8. 倒數第三個放：每日一唱（每次點入都隨機不同歌單） -->
+      <button type="button" class="life-box-full cat-sing" onclick="openRandomSing()">
         <span class="icon">🎤</span>
         <span>每日一唱</span>
-      </a>
+      </button>
 
       <!-- 9. 倒數第二個放：每日一笑（每次點入都隨機不同主題） -->
       <button type="button" class="life-box-full cat-laugh" onclick="openRandomLaugh()">
@@ -819,7 +856,7 @@
         <span>每日一笑</span>
       </button>
 
-      <!-- 10. 最後一個放：備忘錄改善建議（自動帶入文字至 @052qxowa 官方 LINE） -->
+      <!-- 10. 最後一個放：備忘錄改善建議 -->
       <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
         <span class="icon">🎙️</span>
         <span>備忘錄改善建議</span>
@@ -827,12 +864,26 @@
     </div>
   </div>
 
-  <!-- 免責聲明與隱私宣告區塊 -->
+  <!-- 詳細服務免責、防詐騙正版網址與隱私聲明區塊 -->
   <div class="disclaimer-box">
-    <div class="disclaimer-title">⚖️ 服務免責與隱私聲明</div>
-    <p>1. <strong>醫療與用藥免責</strong>：本網站僅提供日常生活備忘輔助，用藥劑量、時間及回診事宜，請務必遵照專業醫師與藥師指示。</p>
-    <p>2. <strong>提醒功能說明</strong>：網頁鬧鐘提醒可能受限於手機瀏覽器背景休眠或省電模式影響，重要事項建議同步設定手機內建鬧鐘。</p>
-    <p>3. <strong>零個資留存安全</strong>：您的所有輸入與備忘紀錄僅儲存於您個人的手機瀏覽器內部，本站不設資料庫、絕不蒐集或上傳任何個人隱私資料。</p>
+    <div class="disclaimer-title">⚖️ 服務免責、防詐騙與隱私聲明</div>
+    
+    <p>1. <strong>【防詐騙重要提醒】認明唯一正版網址</strong>：<br>
+    請務必確認您瀏覽器上方的網址為美茉莉官方正版網址：
+    <span class="official-url-badge">https://memorymoli.github.io/silver</span>
+    近期網路詐騙猖獗，若有不法分子仿冒製作與「美茉莉銀髮備忘錄」外觀相似的假網站，或透過假網站誘導您輸入密碼、銀行帳號、身分證字號或要求匯款，<strong>全數皆為詐騙！</strong>建議您直接將正版網址加入手機桌面或書籤，切勿點擊來路不明的簡訊或陌生連結。</p>
+
+    <p>2. <strong>零個資留存與絕對隱私安全</strong>：<br>
+    本網站為純輔助工具，<strong>不設任何會員註冊、不設後端資料庫</strong>。您所輸入或錄音轉換的所有備忘事項，皆僅安全儲存於您個人的手機瀏覽器內部，本站絕不會蒐集、讀取或上傳您的任何個人隱私與行程資料。</p>
+
+    <p>3. <strong>醫療與用藥安全免責</strong>：<br>
+    本網站僅提供日常生活時間備忘輔助，不具備任何醫療診斷功能。所有用藥劑量、服藥時間及醫院回診事宜，請務必遵照專業醫師與藥師的指示辦理。</p>
+
+    <p>4. <strong>網頁鬧鐘提醒功能說明</strong>：<br>
+    受限於各廠牌手機瀏覽器的背景休眠與省電機制，網頁鬧鐘可能因螢幕關閉過久而無法準時響鈴；若有重要吃藥或回診行程，建議同步設定手機內建鬧鐘以策萬全。</p>
+
+    <p style="margin-bottom:0;">5. <strong>第三方外部網站免責</strong>：<br>
+    「銀髮生活」區塊所提供之外部連結（如計程車叫車、影音平台、政府防詐網站等）均屬各該機構或平台所有，其服務內容與交易安全由各該網站自行負責。</p>
   </div>
 
   <!-- 特大號數字鬧鐘設定彈窗 -->
@@ -865,7 +916,7 @@
     </div>
   </div>
 
-  <!-- 互動式有聲圖文教學視窗（已加入「放到手機桌面」教學） -->
+  <!-- 互動式有聲圖文教學視窗 -->
   <div class="modal-overlay" id="guide-modal" onclick="if(event.target === this) closeGuideModal()">
     <div class="modal-card" style="border-color: #10B981;">
       <div class="modal-title">📖 美茉莉使用教學</div>
@@ -895,8 +946,8 @@
       </div>
 
       <div class="step-item">
-        <div class="step-num">第四步：傳給兒女或念出來</div>
-        <div class="step-desc">在清單中按【🔊 念出】可再聽一次，按【📲 LINE兒女】可直接傳給家人看。</div>
+        <div class="step-num">第四步：傳給親友或念出來</div>
+        <div class="step-desc">在清單中按【🔊 念出】可再聽一次，按【📲 LINE親友】可直接傳給家人或朋友看。</div>
       </div>
 
       <button class="close-modal-btn" onclick="closeGuideModal()">我知道了，關閉教學</button>
@@ -906,7 +957,7 @@
   <script>
     const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v30';
+    const STORAGE_KEY = 'senior_care_notes_v31';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -922,6 +973,32 @@
     let fbRecognition = null;
     let fbPhrases = [];
 
+    // 每日一唱多樣化金曲庫（每次點入隨機抽選不同歌單，不重複上一回）
+    const SING_TOPICS = [
+      "經典國語老歌 卡拉OK 伴唱 歌詞版",
+      "經典台語老歌 卡拉OK 伴唱 歌詞版",
+      "鄧麗君 經典金曲 卡拉OK 伴唱",
+      "鳳飛飛 經典懷舊老歌 卡拉OK 伴唱",
+      "費玉清 經典金曲 抒情老歌 伴唱",
+      "江蕙 經典台語金曲 卡拉OK 伴唱",
+      "台灣校園民歌 經典精選 伴唱歌詞",
+      "群星會 經典懷舊金曲 卡拉OK",
+      "日本經典演歌 國台語翻唱 卡拉OK",
+      "余天 洪榮宏 經典台語老歌 卡拉OK"
+    ];
+    let lastSingIndex = -1;
+
+    function openRandomSing() {
+      let idx = Math.floor(Math.random() * SING_TOPICS.length);
+      if (idx === lastSingIndex) {
+        idx = (idx + 1) % SING_TOPICS.length;
+      }
+      lastSingIndex = idx;
+      const query = encodeURIComponent(SING_TOPICS[idx]);
+      window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank', 'noopener,noreferrer');
+    }
+
+    // 每日一笑多樣化題材庫（每次點入隨機抽選不同主題，不重複上一回）
     const LAUGH_TOPICS = [
       "經典搞笑綜藝短劇 爆笑片段",
       "逗趣可愛動物 爆笑合輯",
@@ -1379,7 +1456,7 @@
       render();
     }
 
-    // 7. 渲染備忘錄清單
+    // 7. 渲染備忘錄清單（LINE親友按鈕）
     function render() {
       const listEl = document.getElementById('notes-list');
       const notes = getNotes();
@@ -1407,7 +1484,7 @@
             </div>
             <div class="card-actions">
               <button class="btn-speak" onclick="speak('${safeCategory}提醒：${safeText}')">🔊 念出</button>
-              <a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="btn-line">📲 LINE兒女</a>
+              <a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="btn-line">📲 LINE親友</a>
               <button class="btn-del" onclick="deleteNote(${n.id})">刪除</button>
             </div>
           </div>
@@ -1415,7 +1492,7 @@
       }).join('');
     }
 
-    // 開啟與關閉有聲教學視窗（包含放到手機桌面的語音教學）
+    // 開啟與關閉有聲教學視窗
     function openGuideModal() {
       document.getElementById('guide-modal').style.display = 'flex';
       playFullVoiceGuide();
@@ -1429,7 +1506,7 @@
     }
 
     function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點右上角三個點，選加到主畫面再按新增。蘋果手機請點下方中間分享鈕，選加入主畫面再按新增。使用時，只要直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，聽到提示音後就會馬上開始錄音！說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘，最後按藍色大按鈕記下來就完成囉！";
+      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點右上角三個點，選加到主畫面再按新增。蘋果手機請點下方中間分享鈕，選加入主畫面再按新增。使用時，只要直接點選上方要記的事情，例如一般日常、回診、運動健身或吃藥，聽到提示音後就會馬上開始錄音！說出例如下午三點吃降血壓藥，系統就會自動幫您設定好鬧鐘，最後按藍色大按鈕記下來，也能傳 LINE 給親友看喔！";
       speak(fullText);
     }
 

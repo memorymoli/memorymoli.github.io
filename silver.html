@@ -12,6 +12,12 @@
     :root {
       color-scheme: light only;
     }
+    html {
+      /* 防止長輩手機系統將網頁特大字「二次放大」導致撐破版面 */
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -27,11 +33,14 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
       padding: 10px 10px 32px 10px;
     }
 
-    /* 頂部看板：天氣、日期、時間滿版特大字且絕不出框 */
+    /* 頂部看板：採用容器自適應 (cqw)，任何機型寬度都完美貼合 */
     .dashboard-card {
+      container-type: inline-size;
       width: 100%;
       max-width: 520px;
       background-color: #1E293B;
@@ -51,21 +60,21 @@
       align-items: center;
       border-bottom: 2px solid #334155;
       padding-bottom: 8px;
-      gap: 4px;
+      gap: 6px;
       width: 100%;
     }
     .weather-info {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: clamp(32px, 9.2vw, 44px);
+      font-size: clamp(28px, 9.5cqw, 44px);
       font-weight: 900;
       color: #38BDF8;
       white-space: nowrap;
       line-height: 1.1;
     }
     .weather-temp {
-      font-size: clamp(36px, 10.5vw, 48px);
+      font-size: clamp(32px, 10.8cqw, 48px);
       font-weight: 900;
       color: #FFFFFF;
       white-space: nowrap;
@@ -80,14 +89,14 @@
       width: 100%;
     }
     .date-text {
-      font-size: clamp(28px, 8.2vw, 38px);
+      font-size: clamp(25px, 8.6cqw, 38px);
       color: #E2E8F0;
       font-weight: 900;
       white-space: nowrap;
       line-height: 1.15;
     }
     .time-text {
-      font-size: clamp(42px, 12.2vw, 56px);
+      font-size: clamp(38px, 13cqw, 56px);
       font-weight: 900;
       color: #F8FAFC;
       letter-spacing: 1px;
@@ -96,9 +105,15 @@
     }
 
     /* 主副標題設計 */
-    header { text-align: center; margin-bottom: 14px; width: 100%; max-width: 520px; }
+    header {
+      container-type: inline-size;
+      text-align: center;
+      margin-bottom: 14px;
+      width: 100%;
+      max-width: 520px;
+    }
     h1 {
-      font-size: clamp(46px, 13.5vw, 60px);
+      font-size: clamp(42px, 14cqw, 60px);
       color: #10B981;
       letter-spacing: 2px;
       font-weight: 900;
@@ -106,7 +121,7 @@
       text-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
     }
     .sub-title {
-      font-size: clamp(34px, 10vw, 46px);
+      font-size: clamp(30px, 10.5cqw, 46px);
       color: #DC2626;
       font-weight: 900;
       letter-spacing: 3px;
@@ -114,8 +129,9 @@
       text-shadow: 0 2px 6px rgba(220, 38, 38, 0.18);
     }
 
-    /* 區塊卡片共通樣式 */
+    /* 區塊卡片共通樣式（啟用容器查詢，內部元素皆按容器寬度精準縮放） */
     .app-card {
+      container-type: inline-size;
       width: 100%;
       max-width: 520px;
       background-color: #FFFFFF;
@@ -127,12 +143,13 @@
       overflow: hidden;
     }
     .section-label {
-      font-size: clamp(32px, 9.2vw, 40px);
+      font-size: clamp(28px, 9.5cqw, 40px);
       color: #0F172A;
       margin-bottom: 14px;
       font-weight: 900;
       text-align: center;
       line-height: 1.2;
+      text-wrap: balance;
     }
 
     /* 單欄滿版大按鈕清單（點選要記的事情） */
@@ -146,26 +163,27 @@
     .memo-box-full {
       width: 100%;
       border: 4px solid transparent;
-      font-size: clamp(34px, 9.8vw, 44px);
+      font-size: clamp(30px, 10.2cqw, 44px);
       font-weight: 900;
-      padding: 18px 16px;
+      padding: 18px 12px;
       border-radius: 18px;
       cursor: pointer;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       text-align: center;
-      min-height: 92px;
+      min-height: 90px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
       -webkit-tap-highlight-color: transparent;
       transition: all 0.2s ease;
-      white-space: nowrap;
+      overflow: hidden;
     }
     .memo-box-full span.icon {
-      font-size: clamp(44px, 12vw, 54px);
+      font-size: clamp(38px, 12.5cqw, 54px);
       line-height: 1;
+      flex-shrink: 0;
     }
 
     .cat-daily { background-color: #F3E8FF; border-color: #E9D5FF; color: #7E22CE; }
@@ -203,26 +221,28 @@
       text-align: center;
     }
     .mic-status-text {
-      font-size: clamp(22px, 6.2vw, 27px);
+      font-size: clamp(20px, 6.4cqw, 27px);
       color: #DC2626;
       font-weight: 900;
       line-height: 1.35;
       margin-bottom: 8px;
+      text-wrap: balance;
     }
     .stop-rec-btn {
       background-color: #DC2626;
       color: #FFFFFF;
       border: none;
-      font-size: clamp(22px, 6vw, 26px);
+      font-size: clamp(20px, 6.2cqw, 26px);
       font-weight: 900;
-      padding: 10px 24px;
+      padding: 10px 20px;
       border-radius: 12px;
       cursor: pointer;
+      max-width: 100%;
     }
 
     /* 純打字輸入區 */
     .sub-input-label {
-      font-size: clamp(26px, 7.5vw, 32px);
+      font-size: clamp(24px, 7.8cqw, 32px);
       color: #1E293B;
       margin-top: 4px;
       margin-bottom: 10px;
@@ -234,7 +254,7 @@
       border: 3px solid #CBD5E1;
       border-radius: 14px;
       color: #0F172A;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       font-weight: 900;
       padding: 16px 12px;
       outline: none;
@@ -254,16 +274,16 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      gap: 8px;
+      gap: 6px;
     }
     .alarm-trigger-label {
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       color: #1E293B;
       font-weight: 900;
       white-space: nowrap;
     }
     .alarm-trigger-value {
-      font-size: clamp(26px, 7.4vw, 34px);
+      font-size: clamp(24px, 7.6cqw, 34px);
       color: #0284C7;
       font-weight: 900;
       white-space: nowrap;
@@ -274,16 +294,17 @@
       background: linear-gradient(145deg, #0284C7, #0369A1);
       border: none;
       color: #FFFFFF;
-      font-size: clamp(26px, 7.5vw, 34px);
+      font-size: clamp(24px, 7.8cqw, 34px);
       font-weight: 900;
       padding: 18px 8px;
       border-radius: 16px;
       cursor: pointer;
       box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
-      white-space: nowrap;
+      line-height: 1.2;
+      text-wrap: balance;
     }
 
-    /* 銀髮生活：全部單獨滿版垂直排列，字體放到最大且不出框 */
+    /* 銀髮生活：全部單獨滿版垂直排列，字體按容器精準縮放且不出框 */
     .life-stack-1x {
       display: flex;
       flex-direction: column;
@@ -293,7 +314,7 @@
     .life-box-full {
       width: 100%;
       border: 4px solid transparent;
-      font-size: clamp(30px, 8.8vw, 40px);
+      font-size: clamp(27px, 9cqw, 40px);
       font-weight: 900;
       padding: 18px 12px;
       border-radius: 18px;
@@ -305,7 +326,7 @@
       gap: 12px;
       text-decoration: none;
       text-align: center;
-      min-height: 96px;
+      min-height: 94px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.07);
       -webkit-tap-highlight-color: transparent;
       transition: all 0.2s ease;
@@ -313,7 +334,7 @@
       overflow: hidden;
     }
     .life-box-full span.icon {
-      font-size: clamp(40px, 11vw, 50px);
+      font-size: clamp(36px, 11.5cqw, 50px);
       line-height: 1;
       flex-shrink: 0;
     }
@@ -322,9 +343,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      min-width: 0;
     }
     .life-sub-text {
-      font-size: clamp(22px, 6.2vw, 28px);
+      font-size: clamp(20px, 6.4cqw, 28px);
       font-weight: 900;
       margin-top: 2px;
       display: block;
@@ -360,12 +382,13 @@
       overflow: hidden;
     }
     .facility-title {
-      font-size: clamp(24px, 7vw, 32px);
+      font-size: clamp(22px, 7.2cqw, 32px);
       font-weight: 900;
-      line-height: 1.2;
+      line-height: 1.25;
       margin-bottom: 12px;
-      white-space: nowrap;
       text-align: center;
+      text-wrap: balance;
+      width: 100%;
     }
     .sub-link-row-2 {
       display: grid;
@@ -380,14 +403,14 @@
       width: 100%;
       min-width: 0;
       color: #FFFFFF;
-      font-size: clamp(21px, 6vw, 28px);
+      font-size: clamp(19px, 6.2cqw, 28px);
       font-weight: 900;
       padding: 14px 4px;
       border-radius: 12px;
       text-decoration: none;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-      white-space: nowrap;
+      line-height: 1.2;
       overflow: hidden;
     }
     .sub-link-col-1 {
@@ -397,17 +420,19 @@
       width: 100%;
     }
     .sub-link-btn-big {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       color: #FFFFFF;
-      font-size: clamp(26px, 7.4vw, 34px);
+      font-size: clamp(24px, 7.8cqw, 34px);
       font-weight: 900;
       padding: 16px 8px;
       border-radius: 14px;
       text-decoration: none;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-      white-space: nowrap;
+      line-height: 1.2;
     }
 
     .cat-guide { background-color: #FCE7F3; border-color: #FBCFE8; color: #BE185D; }
@@ -421,6 +446,7 @@
 
     /* 備忘清單區塊 */
     .list-container {
+      container-type: inline-size;
       width: 100%;
       max-width: 520px;
       display: flex;
@@ -429,7 +455,7 @@
       margin-bottom: 22px;
     }
     .list-header {
-      font-size: clamp(28px, 8.2vw, 36px);
+      font-size: clamp(26px, 8.5cqw, 36px);
       color: #0F172A;
       border-bottom: 3px solid #CBD5E1;
       padding-bottom: 8px;
@@ -448,7 +474,7 @@
       overflow: hidden;
     }
     .cat-tag {
-      font-size: clamp(20px, 5.6vw, 24px);
+      font-size: clamp(19px, 5.8cqw, 24px);
       padding: 5px 12px;
       border-radius: 8px;
       font-weight: 900;
@@ -461,14 +487,14 @@
     .tag-一般日常 { background-color: #F3E8FF; color: #7E22CE; }
 
     .note-text {
-      font-size: clamp(26px, 7.4vw, 34px);
+      font-size: clamp(24px, 7.6cqw, 34px);
       color: #0F172A;
       font-weight: 900;
       line-height: 1.3;
       word-break: break-word;
     }
     .note-alarm {
-      font-size: clamp(22px, 6.2vw, 28px);
+      font-size: clamp(20px, 6.4cqw, 28px);
       color: #0284C7;
       margin-top: 6px;
       font-weight: 900;
@@ -478,17 +504,20 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      min-width: 118px;
+      width: 32%;
+      min-width: 106px;
+      max-width: 132px;
       flex-shrink: 0;
     }
     .btn-speak, .btn-line, .btn-del {
-      padding: 10px 6px;
+      padding: 10px 4px;
       border-radius: 10px;
-      font-size: clamp(19px, 5.2vw, 22px);
+      font-size: clamp(17px, 5.2cqw, 22px);
       font-weight: 900;
       cursor: pointer;
       text-align: center;
       white-space: nowrap;
+      width: 100%;
     }
     .btn-speak { background: #F1F5F9; border: 2px solid #CBD5E1; color: #1E293B; }
     .btn-line { background: #06C755; border: 2px solid #05A848; color: #FFFFFF; text-decoration: none; display: block; }
@@ -496,6 +525,7 @@
 
     /* 詳細免責聲明、隱私與防詐騙網址宣告區塊 */
     .disclaimer-box {
+      container-type: inline-size;
       width: 100%;
       max-width: 520px;
       background-color: #EAE5DC;
@@ -504,17 +534,18 @@
       padding: 18px 14px;
       margin-top: 6px;
       color: #1E293B;
-      font-size: clamp(18px, 5vw, 21px);
+      font-size: clamp(17px, 5.2cqw, 21px);
       line-height: 1.65;
       font-weight: 600;
     }
     .disclaimer-title {
-      font-size: clamp(22px, 6.2vw, 26px);
+      font-size: clamp(20px, 6.4cqw, 26px);
       font-weight: 900;
       color: #0F172A;
       margin-bottom: 10px;
       border-bottom: 2px solid #C8C0B2;
       padding-bottom: 6px;
+      text-wrap: balance;
     }
     .disclaimer-box p {
       margin-bottom: 10px;
@@ -524,7 +555,7 @@
       background-color: #FEF2F2;
       border: 2px solid #DC2626;
       color: #B91C1C;
-      font-size: clamp(17px, 4.8vw, 20px);
+      font-size: clamp(16px, 4.9cqw, 20px);
       font-weight: 900;
       padding: 8px 10px;
       border-radius: 10px;
@@ -548,6 +579,7 @@
       padding: 12px;
     }
     .modal-card {
+      container-type: inline-size;
       background-color: #FFFFFF;
       width: 100%;
       max-width: 500px;
@@ -559,24 +591,25 @@
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     }
     .modal-title {
-      font-size: clamp(30px, 8.5vw, 38px);
+      font-size: clamp(28px, 8.8cqw, 38px);
       font-weight: 900;
       color: #0F172A;
       text-align: center;
       margin-bottom: 14px;
+      text-wrap: balance;
     }
 
     /* 特大號數字鬧鐘選擇網格 */
     .clock-grid-4 {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
       margin-bottom: 16px;
     }
     .clock-grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
       margin-bottom: 16px;
     }
     .num-pick-btn {
@@ -584,9 +617,9 @@
       border: 3px solid #CBD5E1;
       border-radius: 14px;
       color: #0F172A;
-      font-size: clamp(28px, 8vw, 36px);
+      font-size: clamp(24px, 7.8cqw, 36px);
       font-weight: 900;
-      padding: 14px 4px;
+      padding: 14px 2px;
       text-align: center;
       cursor: pointer;
     }
@@ -600,7 +633,7 @@
       background-color: #FFF1F2;
       border: 3px solid #FDA4AF;
       color: #BE123C;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       font-weight: 900;
       padding: 14px;
       border-radius: 14px;
@@ -614,13 +647,15 @@
       background: linear-gradient(145deg, #16A34A, #15803D);
       color: #FFFFFF;
       border: none;
-      font-size: clamp(25px, 7vw, 32px);
+      font-size: clamp(22px, 7.2cqw, 32px);
       font-weight: 900;
       padding: 18px 8px;
       border-radius: 16px;
       cursor: pointer;
       margin-bottom: 12px;
       box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+      line-height: 1.25;
+      text-wrap: balance;
     }
     .voice-fb-btn.recording {
       background: linear-gradient(145deg, #DC2626, #B91C1C);
@@ -633,7 +668,7 @@
       border: 3px solid #CBD5E1;
       border-radius: 16px;
       padding: 14px;
-      font-size: clamp(24px, 6.8vw, 28px);
+      font-size: clamp(22px, 7cqw, 28px);
       font-weight: 800;
       color: #0F172A;
       margin-bottom: 14px;
@@ -645,7 +680,7 @@
       background-color: #06C755;
       color: #FFFFFF;
       border: none;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       font-weight: 900;
       padding: 18px 8px;
       border-radius: 16px;
@@ -653,6 +688,7 @@
       cursor: pointer;
       margin-bottom: 10px;
       line-height: 1.3;
+      text-wrap: balance;
     }
 
     .play-guide-btn {
@@ -660,7 +696,7 @@
       background: linear-gradient(145deg, #10B981, #059669);
       color: #FFFFFF;
       border: none;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       font-weight: 900;
       padding: 16px 8px;
       border-radius: 14px;
@@ -682,13 +718,13 @@
       margin-bottom: 12px;
     }
     .step-num {
-      font-size: clamp(24px, 6.8vw, 28px);
+      font-size: clamp(22px, 7cqw, 28px);
       font-weight: 900;
       color: #0284C7;
       margin-bottom: 4px;
     }
     .step-desc {
-      font-size: clamp(21px, 6vw, 25px);
+      font-size: clamp(20px, 6.2cqw, 25px);
       color: #1E293B;
       font-weight: 800;
       line-height: 1.45;
@@ -698,7 +734,7 @@
       background-color: #334155;
       color: #FFFFFF;
       border: none;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(22px, 7cqw, 30px);
       font-weight: 900;
       padding: 16px 8px;
       border-radius: 14px;
@@ -793,7 +829,7 @@
         <span>使用教學</span>
       </button>
 
-      <!-- 2. 第二個放居家無障礙空間諮詢（已修正臉書專頁按鈕不再跑出框框） -->
+      <!-- 2. 第二個放居家無障礙空間諮詢 -->
       <div class="facility-card-full">
         <div class="facility-title">🛠️ 居家無障礙空間諮詢</div>
         <div class="sub-link-row-2">
@@ -957,7 +993,7 @@
   <script>
     const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v31';
+    const STORAGE_KEY = 'senior_care_notes_v32';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -1462,7 +1498,7 @@
       const notes = getNotes();
 
       if (notes.length === 0) {
-        listEl.innerHTML = '<div style="color:#64748B; text-align:center; margin:16px 0; font-size:clamp(24px, 6.8vw, 30px); font-weight:900;">目前沒有任何備忘事項</div>';
+        listEl.innerHTML = '<div style="color:#64748B; text-align:center; margin:16px 0; font-size:clamp(22px, 7cqw, 30px); font-weight:900;">目前沒有任何備忘事項</div>';
         return;
       }
 

@@ -135,7 +135,7 @@
       line-height: 1.2;
     }
 
-    /* 單欄滿版大按鈕清單（一般日常、回診、運動健身、吃藥不並排，字放到最大） */
+    /* 單欄滿版大按鈕清單（點選要記的事情） */
     .category-stack-1x {
       display: flex;
       flex-direction: column;
@@ -190,14 +190,6 @@
       0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
       70% { box-shadow: 0 0 0 14px rgba(220, 38, 38, 0); }
       100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-    }
-
-    /* 2 欄按鈕格線（銀髮生活專用） */
-    .category-grid-2x {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 8px;
     }
 
     /* 錄音狀態大字提示橫幅 */
@@ -291,49 +283,74 @@
       white-space: nowrap;
     }
 
-    /* 銀髮生活區按鈕：字體放到最大 */
-    .life-box {
+    /* 銀髮生活：全部單獨滿版垂直排列，字體放到最大且不出框 */
+    .life-stack-1x {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+    .life-box-full {
+      width: 100%;
       border: 4px solid transparent;
-      font-size: clamp(27px, 7.8vw, 34px);
+      font-size: clamp(30px, 8.8vw, 40px);
       font-weight: 900;
-      padding: 18px 6px;
+      padding: 18px 12px;
       border-radius: 18px;
       cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      text-align: center;
+      min-height: 96px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s ease;
+      line-height: 1.25;
+      overflow: hidden;
+    }
+    .life-box-full span.icon {
+      font-size: clamp(40px, 11vw, 50px);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .life-text-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-      text-align: center;
-      min-height: 135px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      -webkit-tap-highlight-color: transparent;
-      transition: all 0.2s ease;
-      line-height: 1.2;
     }
-    .life-box span.icon { font-size: clamp(42px, 11.5vw, 52px); line-height: 1; }
     .life-sub-text {
-      font-size: clamp(20px, 5.8vw, 25px);
+      font-size: clamp(22px, 6.2vw, 28px);
       font-weight: 900;
       margin-top: 2px;
       display: block;
     }
 
-    /* 單放一排滿版特大卡片（居家無障礙空間諮詢與每日一笑專用） */
-    .full-span-box {
-      grid-column: span 2;
+    /* 居家無障礙空間諮詢：垂直卡片內含特大雙按鈕 */
+    .facility-card-full {
+      width: 100%;
       background-color: #F8FAFC;
       border: 4px solid #94A3B8;
       color: #0F172A;
       padding: 18px 10px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     }
-    .full-span-title {
+    .facility-title {
       font-size: clamp(26px, 7.6vw, 34px);
       font-weight: 900;
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       white-space: nowrap;
+      text-align: center;
     }
     .sub-link-row-2 {
       display: grid;
@@ -345,7 +362,7 @@
       display: block;
       width: 100%;
       color: #FFFFFF;
-      font-size: clamp(24px, 6.8vw, 30px);
+      font-size: clamp(25px, 7.2vw, 32px);
       font-weight: 900;
       padding: 14px 4px;
       border-radius: 14px;
@@ -356,23 +373,14 @@
     }
 
     .cat-guide { background-color: #FCE7F3; border-color: #FBCFE8; color: #BE185D; }
-    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; }
     .cat-nou { background-color: #E0E7FF; border-color: #C7D2FE; color: #3730A3; }
-    .link-box { background-color: #F8FAFC; border: 3px solid #CBD5E1; color: #1E293B; }
+    .link-box { background-color: #F8FAFC; border: 4px solid #CBD5E1; color: #1E293B; }
     .cat-fraud { background-color: #FEE2E2; border-color: #FCA5A5; color: #991B1B; }
-    .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
-    .cat-taxi { background-color: #FEF08A; border-color: #EAB308; color: #854D0E; } /* 計程車亮眼計程車黃 */
+    .cat-taxi { background-color: #FEF08A; border-color: #EAB308; color: #854D0E; }
     .cat-mind { background-color: #CCFBF1; border-color: #99F6E4; color: #0F766E; }
-    .cat-laugh-full {
-      grid-column: span 2;
-      background-color: #FEF9C3;
-      border-color: #FDE047;
-      color: #A16207;
-      min-height: 110px;
-      flex-direction: row;
-      gap: 14px;
-      font-size: clamp(32px, 9vw, 40px);
-    }
+    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; }
+    .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
+    .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
 
     /* 備忘清單區塊 */
     .list-container {
@@ -658,7 +666,7 @@
     <div class="sub-title">銀髮備忘錄</div>
   </header>
 
-  <!-- 區塊一：點選要記的事情（單獨一個垂直排列，不並排，字放到最大） -->
+  <!-- 區塊一：點選要記的事情（單獨一個垂直排列，字放到最大） -->
   <div class="app-card">
     <div class="section-label">點選要記的事情</div>
 
@@ -711,68 +719,84 @@
     <div id="notes-list"></div>
   </div>
 
-  <!-- 區塊三：銀髮生活 -->
+  <!-- 區塊三：銀髮生活（全部改單獨一個垂直排列，不並排，字放到最大） -->
   <div class="app-card">
     <div class="section-label">銀髮生活</div>
 
-    <div class="category-grid-2x">
-      <!-- 第一排：使用教學、備忘錄改善建議 -->
-      <button class="life-box cat-guide" onclick="openGuideModal()">
+    <div class="life-stack-1x">
+      <!-- 1. 第一個放使用教學 -->
+      <button class="life-box-full cat-guide" onclick="openGuideModal()">
         <span class="icon">📖</span>
         <span>使用教學</span>
       </button>
 
-      <button class="life-box cat-feedback" onclick="openFeedbackModal()">
-        <span class="icon">🎙️</span>
-        <span style="line-height: 1.15;">備忘錄<br>改善建議</span>
-      </button>
-
-      <!-- 第二排：居家無障礙空間諮詢（單放一排滿版大卡片） -->
-      <div class="life-box full-span-box">
-        <div class="full-span-title">🛠️ 居家無障礙空間諮詢</div>
+      <!-- 2. 第二個放居家無障礙空間諮詢 -->
+      <div class="facility-card-full">
+        <div class="facility-title">🛠️ 居家無障礙空間諮詢</div>
         <div class="sub-link-row-2">
           <a href="https://maps.app.goo.gl/tiNDgm5CQbmy8PhT7?g_st=al" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#0284C7;">📍 地圖導航</a>
           <a href="https://www.facebook.com/share/1DvCdVuFQJ/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#1877F2;">📘 臉書專頁</a>
         </div>
       </div>
 
-      <!-- 第三排：終身學習、老當益壯 -->
-      <a href="https://www.nou.edu.tw" target="_blank" rel="noopener noreferrer" class="life-box cat-nou">
+      <!-- 3. 終身學習（空中大學） -->
+      <a href="https://www.nou.edu.tw" target="_blank" rel="noopener noreferrer" class="life-box-full cat-nou">
         <span class="icon">🎓</span>
-        <span>終身學習<span class="life-sub-text">(空中大學)</span></span>
+        <div class="life-text-wrap">
+          <span>終身學習</span>
+          <span class="life-sub-text">(空中大學)</span>
+        </div>
       </a>
 
-      <a href="https://45plus.wda.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box link-box">
+      <!-- 4. 老當益壯（中高齡就業） -->
+      <a href="https://45plus.wda.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box-full link-box">
         <span class="icon">💼</span>
-        <span>老當益壯<span class="life-sub-text">(中高齡就業)</span></span>
+        <div class="life-text-wrap">
+          <span>老當益壯</span>
+          <span class="life-sub-text">(中高齡就業)</span>
+        </div>
       </a>
 
-      <!-- 第四排：防詐騙提醒、每日一唱 -->
-      <a href="https://165.npa.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box cat-fraud">
+      <!-- 5. 防詐騙提醒（165 官網） -->
+      <a href="https://165.npa.gov.tw" target="_blank" rel="noopener noreferrer" class="life-box-full cat-fraud">
         <span class="icon">🛡️</span>
-        <span>防詐騙提醒<span class="life-sub-text">(165 官網)</span></span>
+        <div class="life-text-wrap">
+          <span>防詐騙提醒</span>
+          <span class="life-sub-text">(165 官網)</span>
+        </div>
       </a>
 
-      <a href="https://www.youtube.com/results?search_query=%E5%9C%8B%E8%AA%9E%E8%80%81%E6%AD%8C+%E5%8D%A1%E6%8B%89OK+%E4%BC%B4%E5%94%B1" target="_blank" rel="noopener noreferrer" class="life-box cat-sing">
-        <span class="icon">🎤</span>
-        <span>每日一唱</span>
-      </a>
-
-      <!-- 第五排（每日一笑上方）：計程車叫車、心靈有方（指定連結） -->
-      <a href="https://www.55688.com.tw/" target="_blank" rel="noopener noreferrer" class="life-box cat-taxi">
+      <!-- 6. 計程車叫車（大文山計程車） -->
+      <a href="http://www.dwstaxi.com.tw/" target="_blank" rel="noopener noreferrer" class="life-box-full cat-taxi">
         <span class="icon">🚕</span>
-        <span>計程車叫車<span class="life-sub-text">(55688)</span></span>
+        <div class="life-text-wrap">
+          <span>計程車叫車</span>
+          <span class="life-sub-text">(大文山計程車)</span>
+        </div>
       </a>
 
-      <a href="https://m.youtube.com/watch?v=9BBPtPXkCX4&pp=ygUM5aWJ5YWD5pu46Zmi" target="_blank" rel="noopener noreferrer" class="life-box cat-mind">
+      <!-- 7. 心靈有方 -->
+      <a href="https://m.youtube.com/watch?v=9BBPtPXkCX4&pp=ygUM5aWJ5YWD5pu46Zmi" target="_blank" rel="noopener noreferrer" class="life-box-full cat-mind">
         <span class="icon">🧘</span>
         <span>心靈有方</span>
       </a>
 
-      <!-- 第六排（最下方）：每日一笑（多元銀髮幽默喜劇、綜藝、笑話，不再固定相聲） -->
-      <a href="https://www.youtube.com/results?search_query=%E8%B1%AC%E5%93%A5%E4%BA%AE+%E7%B6%93%E5%85%B8%E7%9F%AD%E5%8A%87+%E6%90%9E%E7%AC%91%E7%B6%9C%E8%97%9D+%E5%B9%BD%E9%BB%98%E7%AC%91%E8%A9%B1" target="_blank" rel="noopener noreferrer" class="life-box cat-laugh-full">
+      <!-- 8. 倒數第三個放：備忘錄改善建議 -->
+      <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
+        <span class="icon">🎙️</span>
+        <span>備忘錄改善建議</span>
+      </button>
+
+      <!-- 9. 倒數第二個放：每日一唱 -->
+      <a href="https://www.youtube.com/results?search_query=%E5%9C%8B%E8%AA%9E%E8%80%81%E6%AD%8C+%E5%8D%A1%E6%8B%89OK+%E4%BC%B4%E5%94%B1" target="_blank" rel="noopener noreferrer" class="life-box-full cat-sing">
+        <span class="icon">🎤</span>
+        <span>每日一唱</span>
+      </a>
+
+      <!-- 10. 最後一個放：每日一笑 -->
+      <a href="https://www.youtube.com/results?search_query=%E8%B1%AC%E5%93%A5%E4%BA%AE+%E7%B6%93%E5%85%B8%E7%9F%AD%E5%8A%87+%E6%90%9E%E7%AC%91%E7%B6%9C%E8%97%9D+%E5%B9%BD%E9%BB%98%E7%AC%91%E8%A9%B1" target="_blank" rel="noopener noreferrer" class="life-box-full cat-laugh">
         <span class="icon">😄</span>
-        <span>每日一笑（幽默短劇）</span>
+        <span>每日一笑</span>
       </a>
     </div>
   </div>
@@ -803,7 +827,7 @@
     </div>
   </div>
 
-  <!-- 語音錄音版：備忘錄改善建議彈窗（直接寄信給站長，不經 LINE） -->
+  <!-- 語音錄音版：備忘錄改善建議彈窗 -->
   <div class="modal-overlay" id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()">
     <div class="modal-card" style="border-color: #D97706;">
       <div class="modal-title">🎙️ 語音改善建議</div>
@@ -846,10 +870,9 @@
   </div>
 
   <script>
-    // ★ 這裡填入您從 Formspree.io 免費申請的接收網址，即可直接收到使用者的語音建議
     const FORMSPREE_URL = "https://formspree.io/f/您的表單代碼";
 
-    const STORAGE_KEY = 'senior_care_notes_v25';
+    const STORAGE_KEY = 'senior_care_notes_v26';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -861,7 +884,6 @@
     let countdownSec = 15;
     let savedPhrases = [];
 
-    // 意見回饋專用錄音變數
     let isFbRecording = false;
     let fbRecognition = null;
     let fbPhrases = [];
@@ -972,7 +994,7 @@
       }
     }
 
-    // 3. 語音改善建議功能（不經 LINE，直接語音錄音並寄給開發者）
+    // 3. 語音改善建議功能
     function openFeedbackModal() {
       document.getElementById('feedback-modal').style.display = 'flex';
       document.getElementById('fb-mic-tip').innerText = '';
@@ -1058,15 +1080,13 @@
       sendBtn.innerText = '傳送中，請稍候...';
       sendBtn.disabled = true;
 
-      // 同時先在本機備份一筆，防網路斷線
       const localFb = JSON.parse(localStorage.getItem('memorymoli_feedback_backup') || '[]');
       localFb.push({ time: new Date().toLocaleString('zh-TW'), message: text });
       localStorage.setItem('memorymoli_feedback_backup', JSON.stringify(localFb));
 
       if (FORMSPREE_URL.includes("您的表單代碼")) {
-        // 尚未填入 Formspree 網址時的友善提示
         speak("謝謝您的寶貴建議！已經幫您記錄下來囉！");
-        alert("感謝您的建議！\n\n（提醒站長：請至 formspree.io 申請免費代碼並填入程式碼中的 FORMSPREE_URL，即可自動寄到您的信箱。）");
+        alert("感謝您的建議！\n\n（提醒站長：未來申請好 LINE 官方帳號後，貼上專屬連結即可直連官方帳號。）");
         document.getElementById('feedback-input').value = '';
         sendBtn.innerText = '📨 送出建議給美茉莉';
         sendBtn.disabled = false;
@@ -1083,7 +1103,7 @@
           使用者語音建議: text
         })
       })
-      .then(res => {
+      .then(() => {
         speak("謝謝您的寶貴建議，我們已經收到囉！");
         alert("謝謝您！您的建議已經成功送出給美茉莉團隊。");
         document.getElementById('feedback-input').value = '';

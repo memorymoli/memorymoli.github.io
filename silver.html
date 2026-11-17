@@ -330,13 +330,26 @@
       display: block;
     }
 
-    /* 居家無障礙空間諮詢：垂直卡片內含特大雙按鈕 */
+    /* 居家無障礙與計程車叫車：垂直卡片內含特大按鈕 */
     .facility-card-full {
       width: 100%;
       background-color: #F8FAFC;
       border: 4px solid #94A3B8;
       color: #0F172A;
-      padding: 18px 10px;
+      padding: 18px 12px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+    .taxi-card-full {
+      width: 100%;
+      background-color: #FEF9C3;
+      border: 4px solid #EAB308;
+      color: #713F12;
+      padding: 18px 12px;
       border-radius: 18px;
       display: flex;
       flex-direction: column;
@@ -358,13 +371,19 @@
       gap: 10px;
       width: 100%;
     }
+    .sub-link-col-1 {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
     .sub-link-btn-big {
       display: block;
       width: 100%;
       color: #FFFFFF;
-      font-size: clamp(25px, 7.2vw, 32px);
+      font-size: clamp(26px, 7.4vw, 34px);
       font-weight: 900;
-      padding: 14px 4px;
+      padding: 16px 8px;
       border-radius: 14px;
       text-decoration: none;
       text-align: center;
@@ -376,11 +395,10 @@
     .cat-nou { background-color: #E0E7FF; border-color: #C7D2FE; color: #3730A3; }
     .link-box { background-color: #F8FAFC; border: 4px solid #CBD5E1; color: #1E293B; }
     .cat-fraud { background-color: #FEE2E2; border-color: #FCA5A5; color: #991B1B; }
-    .cat-taxi { background-color: #FEF08A; border-color: #EAB308; color: #854D0E; }
     .cat-mind { background-color: #CCFBF1; border-color: #99F6E4; color: #0F766E; }
-    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; }
     .cat-sing { background-color: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
     .cat-laugh { background-color: #FEF9C3; border-color: #FDE047; color: #A16207; }
+    .cat-feedback { background-color: #FEF3C7; border-color: #FCD34D; color: #B45309; }
 
     /* 備忘清單區塊 */
     .list-container {
@@ -766,14 +784,14 @@
         </div>
       </a>
 
-      <!-- 6. 計程車叫車（大文山計程車） -->
-      <a href="http://www.dwstaxi.com.tw/" target="_blank" rel="noopener noreferrer" class="life-box-full cat-taxi">
-        <span class="icon">🚕</span>
-        <div class="life-text-wrap">
-          <span>計程車叫車</span>
-          <span class="life-sub-text">(大文山計程車)</span>
+      <!-- 6. 計程車叫車（大文山放上面、台灣大車隊放下面） -->
+      <div class="taxi-card-full">
+        <div class="facility-title">🚕 計程車叫車</div>
+        <div class="sub-link-col-1">
+          <a href="http://www.dwstaxi.com.tw/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#D97706;">🚕 大文山計程車</a>
+          <a href="https://www.taiwantaxi.com.tw/" target="_blank" rel="noopener noreferrer" class="sub-link-btn-big" style="background:#B45309;">🚖 台灣大車隊</a>
         </div>
-      </a>
+      </div>
 
       <!-- 7. 心靈有方 -->
       <a href="https://m.youtube.com/watch?v=9BBPtPXkCX4&pp=ygUM5aWJ5YWD5pu46Zmi" target="_blank" rel="noopener noreferrer" class="life-box-full cat-mind">
@@ -781,23 +799,23 @@
         <span>心靈有方</span>
       </a>
 
-      <!-- 8. 倒數第三個放：備忘錄改善建議 -->
-      <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
-        <span class="icon">🎙️</span>
-        <span>備忘錄改善建議</span>
-      </button>
-
-      <!-- 9. 倒數第二個放：每日一唱 -->
+      <!-- 8. 倒數第三個放：每日一唱 -->
       <a href="https://www.youtube.com/results?search_query=%E5%9C%8B%E8%AA%9E%E8%80%81%E6%AD%8C+%E5%8D%A1%E6%8B%89OK+%E4%BC%B4%E5%94%B1" target="_blank" rel="noopener noreferrer" class="life-box-full cat-sing">
         <span class="icon">🎤</span>
         <span>每日一唱</span>
       </a>
 
-      <!-- 10. 最後一個放：每日一笑 -->
-      <a href="https://www.youtube.com/results?search_query=%E8%B1%AC%E5%93%A5%E4%BA%AE+%E7%B6%93%E5%85%B8%E7%9F%AD%E5%8A%87+%E6%90%9E%E7%AC%91%E7%B6%9C%E8%97%9D+%E5%B9%BD%E9%BB%98%E7%AC%91%E8%A9%B1" target="_blank" rel="noopener noreferrer" class="life-box-full cat-laugh">
+      <!-- 9. 倒數第二個放：每日一笑（每次點入都隨機不同主題） -->
+      <button type="button" class="life-box-full cat-laugh" onclick="openRandomLaugh()">
         <span class="icon">😄</span>
         <span>每日一笑</span>
-      </a>
+      </button>
+
+      <!-- 10. 最後一個放：備忘錄改善建議 -->
+      <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
+        <span class="icon">🎙️</span>
+        <span>備忘錄改善建議</span>
+      </button>
     </div>
   </div>
 
@@ -872,7 +890,7 @@
   <script>
     const FORMSPREE_URL = "https://formspree.io/f/您的表單代碼";
 
-    const STORAGE_KEY = 'senior_care_notes_v26';
+    const STORAGE_KEY = 'senior_care_notes_v27';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -887,6 +905,31 @@
     let isFbRecording = false;
     let fbRecognition = null;
     let fbPhrases = [];
+
+    // 每日一笑多樣化題材庫（每次點入隨機抽選不同主題，不重複上一回）
+    const LAUGH_TOPICS = [
+      "經典搞笑綜藝短劇 爆笑片段",
+      "逗趣可愛動物 爆笑合輯",
+      "台灣經典喜劇 幽默短片",
+      "銀髮族 幽默笑話 爆笑短劇",
+      "黃金夜總會 澎恰恰 許效舜 爆笑短劇",
+      "溫馨搞笑生活短片 讓人開心大笑",
+      "孫越 陶大偉 經典幽默喜劇",
+      "趣味魔術 搞笑表演 讓人開懷大笑",
+      "相聲瓦舍 馮翊綱 宋少卿 幽默段子",
+      "可愛小孩 逗趣反應 爆笑短片"
+    ];
+    let lastLaughIndex = -1;
+
+    function openRandomLaugh() {
+      let idx = Math.floor(Math.random() * LAUGH_TOPICS.length);
+      if (idx === lastLaughIndex) {
+        idx = (idx + 1) % LAUGH_TOPICS.length;
+      }
+      lastLaughIndex = idx;
+      const query = encodeURIComponent(LAUGH_TOPICS[idx]);
+      window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank', 'noopener,noreferrer');
+    }
 
     function escapeHtml(str) {
       if (!str) return '';

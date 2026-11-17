@@ -602,19 +602,20 @@
       margin-bottom: 14px;
       outline: none;
     }
-    .send-direct-btn {
+    .send-line-oa-btn {
       display: block;
       width: 100%;
-      background-color: #0284C7;
+      background-color: #06C755;
       color: #FFFFFF;
       border: none;
-      font-size: clamp(25px, 7vw, 32px);
+      font-size: clamp(24px, 6.8vw, 30px);
       font-weight: 900;
       padding: 18px 8px;
       border-radius: 16px;
       text-align: center;
       cursor: pointer;
       margin-bottom: 10px;
+      line-height: 1.3;
     }
 
     .play-guide-btn {
@@ -737,7 +738,7 @@
     <div id="notes-list"></div>
   </div>
 
-  <!-- 區塊三：銀髮生活（全部改單獨一個垂直排列，不並排，字放到最大） -->
+  <!-- 區塊三：銀髮生活（全部單獨垂直排列，字放到最大） -->
   <div class="app-card">
     <div class="section-label">銀髮生活</div>
 
@@ -811,7 +812,7 @@
         <span>每日一笑</span>
       </button>
 
-      <!-- 10. 最後一個放：備忘錄改善建議 -->
+      <!-- 10. 最後一個放：備忘錄改善建議（直連您的 LINE 官方帳號 @052qxowa） -->
       <button class="life-box-full cat-feedback" onclick="openFeedbackModal()">
         <span class="icon">🎙️</span>
         <span>備忘錄改善建議</span>
@@ -845,14 +846,14 @@
     </div>
   </div>
 
-  <!-- 語音錄音版：備忘錄改善建議彈窗 -->
+  <!-- 語音錄音版：備忘錄改善建議彈窗（直連 @052qxowa 官方 LINE） -->
   <div class="modal-overlay" id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()">
-    <div class="modal-card" style="border-color: #D97706;">
-      <div class="modal-title">🎙️ 語音改善建議</div>
+    <div class="modal-card" style="border-color: #06C755;">
+      <div class="modal-title">🎙️ 備忘錄改善建議</div>
       <button type="button" id="fb-mic-btn" class="voice-fb-btn" onclick="toggleFeedbackRecord()">🔴 點這裡，用講的說出建議</button>
       <div id="fb-mic-tip" style="font-size: 20px; color: #DC2626; font-weight: 900; text-align: center; margin-bottom: 8px;"></div>
       <textarea id="feedback-input" class="feedback-textarea" placeholder="說話後文字會出現在這裡，也可以打字修改..."></textarea>
-      <button type="button" id="fb-send-btn" class="send-direct-btn" onclick="submitFeedbackDirectly()">📨 送出建議給美茉莉</button>
+      <button type="button" class="send-line-oa-btn" onclick="sendToOfficialLine()">📲 複製建議並傳到<br>美茉莉官方 LINE</button>
       <button type="button" class="close-modal-btn" onclick="closeFeedbackModal()">關閉視窗</button>
     </div>
   </div>
@@ -888,9 +889,10 @@
   </div>
 
   <script>
-    const FORMSPREE_URL = "https://formspree.io/f/您的表單代碼";
+    // 您的美茉莉 LINE 官方帳號連結
+    const OFFICIAL_LINE_URL = "https://line.me/R/ti/p/@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v27';
+    const STORAGE_KEY = 'senior_care_notes_v28';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -1037,11 +1039,11 @@
       }
     }
 
-    // 3. 語音改善建議功能
+    // 3. 語音改善建議功能（自動複製並跳轉至 @052qxowa 官方 LINE）
     function openFeedbackModal() {
       document.getElementById('feedback-modal').style.display = 'flex';
       document.getElementById('fb-mic-tip').innerText = '';
-      speak("請點綠色按鈕，說出您的改善建議", () => {
+      speak("請說出您的改善建議", () => {
         startFeedbackRecord();
       });
     }
@@ -1111,55 +1113,24 @@
       document.getElementById('fb-mic-tip').innerText = '';
     }
 
-    function submitFeedbackDirectly() {
+    function sendToOfficialLine() {
       stopFeedbackRecord();
       const text = document.getElementById('feedback-input').value.trim();
-      if (!text) {
-        speak("請先說出或輸入您的建議喔！");
-        return;
+      const formattedText = text ? `【美茉莉改善建議】\n${text}` : '';
+
+      if (formattedText && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(formattedText).catch(() => {});
       }
 
-      const sendBtn = document.getElementById('fb-send-btn');
-      sendBtn.innerText = '傳送中，請稍候...';
-      sendBtn.disabled = true;
-
-      const localFb = JSON.parse(localStorage.getItem('memorymoli_feedback_backup') || '[]');
-      localFb.push({ time: new Date().toLocaleString('zh-TW'), message: text });
-      localStorage.setItem('memorymoli_feedback_backup', JSON.stringify(localFb));
-
-      if (FORMSPREE_URL.includes("您的表單代碼")) {
-        speak("謝謝您的寶貴建議！已經幫您記錄下來囉！");
-        alert("感謝您的建議！\n\n（提醒站長：未來申請好 LINE 官方帳號後，貼上專屬連結即可直連官方帳號。）");
-        document.getElementById('feedback-input').value = '';
-        sendBtn.innerText = '📨 送出建議給美茉莉';
-        sendBtn.disabled = false;
-        closeFeedbackModal();
-        return;
+      if (text) {
+        speak("已經幫您複製好建議文字！現在為您打開美茉莉官方 LINE，請在聊天室按貼上並送出喔！");
+      } else {
+        speak("現在為您打開美茉莉官方 LINE 聊天室！");
       }
 
-      fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          來源: '美茉莉銀髮備忘錄',
-          時間: new Date().toLocaleString('zh-TW'),
-          使用者語音建議: text
-        })
-      })
-      .then(() => {
-        speak("謝謝您的寶貴建議，我們已經收到囉！");
-        alert("謝謝您！您的建議已經成功送出給美茉莉團隊。");
-        document.getElementById('feedback-input').value = '';
-        closeFeedbackModal();
-      })
-      .catch(() => {
-        speak("網路不太穩定，建議已先幫您保存在手機裡囉！");
-        alert("目前網路不穩，建議已先幫您保存。");
-      })
-      .finally(() => {
-        sendBtn.innerText = '📨 送出建議給美茉莉';
-        sendBtn.disabled = false;
-      });
+      window.open(OFFICIAL_LINE_URL, '_blank', 'noopener,noreferrer');
+      document.getElementById('feedback-input').value = '';
+      closeFeedbackModal();
     }
 
     // 4. 自然語意時間解析器

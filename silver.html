@@ -7,12 +7,6 @@
   <meta name="robots" content="noindex, nofollow">
   <!-- 強制淺色護眼模式 -->
   <meta name="color-scheme" content="light only">
-  <!-- PWA 桌面全螢幕與主題色設定 -->
-  <meta name="theme-color" content="#10B981">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="美茉莉">
-  <link rel="manifest" href="./manifest.json">
   <title>美茉莉 - 銀髮備忘錄</title>
   <style>
     :root {
@@ -133,31 +127,6 @@
       letter-spacing: 3px;
       margin-top: 4px;
       text-shadow: 0 2px 6px rgba(220, 38, 38, 0.18);
-    }
-
-    /* PWA 安裝提示橫幅（僅在可一鍵安裝時自動顯示） */
-    .pwa-install-banner {
-      display: none;
-      width: 100%;
-      max-width: 520px;
-      background-color: #ECFDF5;
-      border: 3px solid #10B981;
-      border-radius: 18px;
-      padding: 12px;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-    .pwa-install-btn {
-      width: 100%;
-      background: linear-gradient(145deg, #10B981, #059669);
-      color: #FFFFFF;
-      border: none;
-      font-size: clamp(22px, 7cqw, 30px);
-      font-weight: 900;
-      padding: 14px 10px;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
     /* 區塊卡片共通樣式 */
@@ -551,30 +520,50 @@
       padding: 4px 0;
     }
 
-    /* LINE親友或自己按鈕獨立滿版特大字 */
-    .btn-line-huge {
+    /* 加入手機鬧鐘/行事曆（關螢幕也會響）特大按鈕 */
+    .btn-sys-alarm {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
+      background: linear-gradient(145deg, #F59E0B, #D97706);
+      border: 3px solid #B45309;
+      color: #FFFFFF;
+      font-size: clamp(25px, 8cqw, 34px);
+      font-weight: 900;
+      padding: 16px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 5px 14px rgba(217, 119, 6, 0.35);
+      line-height: 1.25;
+    }
+    .btn-sys-alarm small {
+      font-size: clamp(19px, 5.8cqw, 24px);
+      font-weight: 800;
+      color: #FEF3C7;
+      margin-top: 2px;
+    }
+
+    /* LINE親友按鈕獨立滿版特大字 */
+    .btn-line-huge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
       background-color: #06C755;
       border: 3px solid #05A848;
       color: #FFFFFF;
-      font-size: clamp(28px, 9.2cqw, 38px);
+      font-size: clamp(30px, 9.8cqw, 42px);
       font-weight: 900;
-      padding: 16px 10px;
+      padding: 18px 10px;
       border-radius: 16px;
       text-decoration: none;
       text-align: center;
       box-shadow: 0 5px 14px rgba(6, 199, 85, 0.35);
-      line-height: 1.25;
-    }
-    .btn-line-huge small {
-      font-size: clamp(19px, 5.8cqw, 24px);
-      font-weight: 800;
-      color: #ECFDF5;
-      margin-top: 2px;
+      line-height: 1.2;
     }
 
     /* 念出與刪除按鈕並排特大字 */
@@ -875,11 +864,6 @@
     <div class="sub-title">銀髮備忘錄</div>
   </header>
 
-  <!-- PWA 一鍵安裝到桌面提示（安卓 Chrome 支援自動跳出） -->
-  <div class="pwa-install-banner" id="pwa-install-banner">
-    <button type="button" class="pwa-install-btn" id="pwa-install-btn">📲 點這裡把「美茉莉」放到手機桌面</button>
-  </div>
-
   <!-- 區塊一：點選要記的事情 -->
   <div class="app-card">
     <div class="section-label">點選要記的事情</div>
@@ -925,7 +909,7 @@
     <button class="add-btn" onclick="addNote()">＋ 記下來並設定提醒</button>
   </div>
 
-  <!-- 區塊二：記下的行程清單（整區字體放到最大） -->
+  <!-- 區塊二：記下的行程清單（整區字體放到最大，支援關螢幕手機行事曆響鈴） -->
   <div class="list-container">
     <div class="list-header">
       📋 記下的行程清單
@@ -1022,8 +1006,21 @@
       <span class="official-url-badge">https://memorymoli.github.io/silver</span>
     </p>
     <p>2. <strong>零個資留存</strong>：所有紀錄僅存於您個人手機瀏覽器，本站不蒐集或上傳任何個資。</p>
-    <p>3. <strong>醫療與提醒說明</strong>：用藥與回診請遵照醫師指示；重要行程可按綠色按鈕傳到 LINE 雙重提醒。</p>
+    <p>3. <strong>醫療與提醒說明</strong>：用藥與回診請遵照醫師指示；重要行程請點「加入手機鬧鐘」確保關螢幕也能響。</p>
     <p style="margin-bottom:0;">4. <strong>外部連結免責</strong>：第三方網站內容與服務由各該機構自行負責。</p>
+  </div>
+
+  <!-- 儲存成功後引導加入手機系統鬧鐘（關螢幕也會響）彈窗 -->
+  <div class="modal-overlay" id="sys-alarm-modal" onclick="if(event.target === this) closeSysAlarmModal()">
+    <div class="modal-card" style="border-color: #D97706;">
+      <div class="modal-title" style="color: #B45309;">✅ 已經幫您記好啦！</div>
+      <div id="sys-alarm-desc" style="font-size: clamp(23px, 7.2cqw, 30px); font-weight: 900; color: #0F172A; text-align: center; line-height: 1.4; margin-bottom: 16px;"></div>
+      <button type="button" class="btn-sys-alarm" id="modal-export-ics-btn" style="margin-bottom: 12px;">
+        🔔 點這裡加入手機鬧鐘
+        <small>（關螢幕、放口袋也會準時響鈴！）</small>
+      </button>
+      <button type="button" class="close-modal-btn" onclick="closeSysAlarmModal()">好，先不用（直接關閉）</button>
+    </div>
   </div>
 
   <!-- 特大號數字鬧鐘設定彈窗 -->
@@ -1068,10 +1065,10 @@
           <div class="guide-step-title" style="color: #047857;">先把「美茉莉」放到手機桌面</div>
         </div>
         <div class="guide-step-body">
-          以後就像點 App 一樣，全螢幕打開就能用，沒網路也能看清單！
+          以後就像點 App 一樣，點一下圖示就能用！
         </div>
         <div class="guide-visual-box" style="color:#065F46; border-color:#10B981;">
-          🤖 <strong>安卓手機</strong>：點右上角 <strong>【⋮】</strong> ➔ 選 <strong>【加到主畫面 / 安裝應用程式】</strong><br>
+          🤖 <strong>安卓手機</strong>：點右上角 <strong>【⋮】</strong> ➔ 選 <strong>【加到主畫面】</strong><br>
           🍎 <strong>蘋果手機</strong>：點下方中間 <strong>【↑】</strong> ➔ 選 <strong>【加入主畫面】</strong>
         </div>
       </div>
@@ -1109,14 +1106,27 @@
 
       <div class="guide-card">
         <div class="guide-header-row">
-          <span class="guide-big-icon">📲</span>
-          <div class="guide-step-title">第三步：傳 LINE 給親友或自己</div>
+          <span class="guide-big-icon">🔔</span>
+          <div class="guide-step-title">第三步：加入手機鬧鐘（關螢幕也會響）</div>
         </div>
         <div class="guide-step-body">
-          在下方清單中，按綠色大按鈕就能直接傳 LINE 告訴家人或傳給自己留存：
+          記下來之後，按橘黃色按鈕加進手機行事曆，就算螢幕關掉放口袋，時間到也會準時響鈴！
+        </div>
+        <div class="guide-visual-box" style="background:#D97706; color:#FFFFFF; border:none;">
+          🔔 加入手機鬧鐘（關螢幕也會響）
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-header-row">
+          <span class="guide-big-icon">📲</span>
+          <div class="guide-step-title">第四步：傳 LINE 給親友或念出來</div>
+        </div>
+        <div class="guide-step-body">
+          在下方清單中，按綠色大按鈕就能直接傳 LINE 告訴家人或朋友：
         </div>
         <div class="guide-visual-box" style="background:#06C755; color:#FFFFFF; border:none;">
-          📲 傳 LINE 給親友或自己
+          📲 LINE親友
         </div>
       </div>
 
@@ -1127,7 +1137,7 @@
   <script>
     const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v37';
+    const STORAGE_KEY = 'senior_care_notes_v36';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -1138,64 +1148,79 @@
     let recordTimer = null;
     let countdownSec = 15;
     let savedPhrases = [];
-    let swRegistration = null;
-    let deferredPrompt = null;
 
     let isFbRecording = false;
     let fbRecognition = null;
     let fbPhrases = [];
 
-    // 註冊 PWA Service Worker（支援離線開啟與系統通知）
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then((reg) => { swRegistration = reg; })
-          .catch(() => {});
-      });
-    }
+    // 產生標準手機行事曆與鬧鐘檔（.ics），匯入後手機關螢幕、放口袋 100% 準時響鈴
+    function exportToSystemAlarm(noteId) {
+      const notes = getNotes();
+      const note = notes.find(n => n.id === noteId);
+      if (!note || !note.time) return;
 
-    // 偵測瀏覽器是否支援一鍵安裝 PWA 到手機桌面
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      const banner = document.getElementById('pwa-install-banner');
-      if (banner) banner.style.display = 'block';
-    });
+      const [hhStr, mmStr] = note.time.split(':');
+      const targetH = parseInt(hhStr, 10);
+      const targetM = parseInt(mmStr, 10);
 
-    const installBtn = document.getElementById('pwa-install-btn');
-    if (installBtn) {
-      installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        document.getElementById('pwa-install-banner').style.display = 'none';
-      });
-    }
-
-    // 申請手機系統通知權限（當長輩設定鬧鐘時自動引導開啟）
-    function requestSystemNotificationPermission() {
-      if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission().catch(() => {});
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetH, targetM, 0);
+      // 若設定時間已過今日現在時刻，自動排程到明天同一時間
+      if (start.getTime() <= now.getTime()) {
+        start.setDate(start.getDate() + 1);
       }
+      const end = new Date(start.getTime() + 15 * 60000);
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const formatICSDate = (d) =>
+        `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+
+      const dtStart = formatICSDate(start);
+      const dtEnd = formatICSDate(end);
+      const dtStamp = formatICSDate(now);
+      const summary = `【美茉莉提醒】${note.category}：${note.text}`;
+
+      const icsLines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//MemoryMoli//SilverMemo//TW',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        `UID:moli-${note.id}-${dtStart}@memorymoli.github.io`,
+        `DTSTAMP:${dtStamp}`,
+        `DTSTART:${dtStart}`,
+        `DTEND:${dtEnd}`,
+        `SUMMARY:${summary}`,
+        `DESCRIPTION:${summary}（由美茉莉銀髮備忘錄建立）`,
+        'BEGIN:VALARM',
+        'TRIGGER:PT0M',
+        'ACTION:DISPLAY',
+        `DESCRIPTION:${summary}`,
+        'END:VALARM',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT5M',
+        'ACTION:DISPLAY',
+        `DESCRIPTION:5分鐘後提醒：${summary}`,
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsLines], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `美茉莉提醒_${hhStr}${mmStr}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+      speak("正在打開手機行事曆鬧鐘，請按儲存或加入，這樣關螢幕也會準時響鈴喔！");
     }
 
-    // 發送系統通知橫幅（PWA 模式下會顯示在手機通知欄並發出提示音）
-    function sendSystemNotification(title, body) {
-      if (!('Notification' in window) || Notification.permission !== 'granted') return;
-      const options = {
-        body: body,
-        vibrate: [300, 150, 300, 150, 300],
-        tag: 'memorymoli-alarm-' + Date.now(),
-        renotify: true
-      };
-      if (swRegistration && swRegistration.showNotification) {
-        swRegistration.showNotification(title, options).catch(() => {
-          new Notification(title, options);
-        });
-      } else {
-        try { new Notification(title, options); } catch (e) {}
-      }
+    function closeSysAlarmModal() {
+      document.getElementById('sys-alarm-modal').style.display = 'none';
     }
 
     const SING_TOPICS = [
@@ -1310,7 +1335,6 @@
     buildBigClockGrid();
 
     function openClockModal() {
-      requestSystemNotificationPermission();
       document.getElementById('clock-modal-title').innerText = '⏰ 請點選「幾點」';
       document.getElementById('hour-step-box').style.display = 'block';
       document.getElementById('minute-step-box').style.display = 'none';
@@ -1632,7 +1656,7 @@
       document.getElementById('mic-banner').style.display = 'none';
     }
 
-    // 6. 儲存與新增備忘錄（自動申請系統通知權限，無繁瑣彈窗）
+    // 6. 儲存與新增備忘錄（若有設時間，同步彈出「加入手機鬧鐘（關螢幕也會響）」引導）
     function addNote() {
       if (isRecording) stopRecord();
 
@@ -1649,24 +1673,38 @@
       }
 
       const alarmStr = selectedHour ? `${selectedHour}:${selectedMinute}` : '';
-      if (alarmStr) {
-        requestSystemNotificationPermission();
-      }
-
       const notes = getNotes();
-      notes.unshift({
+      const newNote = {
         id: Date.now(),
         category: currentCategory,
         text: text,
         time: alarmStr,
         createdDate: new Date().toLocaleDateString('zh-TW', { month: 'numeric', day: 'numeric' })
-      });
+      };
 
+      notes.unshift(newNote);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+
       input.value = '';
       clearAlarmSetting();
       render();
-      speak(`已經幫您記好啦！${currentCategory}，${text}${alarmStr ? '，設定 ' + alarmStr + ' 提醒' : ''}`);
+
+      if (alarmStr) {
+        document.getElementById('sys-alarm-desc').innerHTML = `
+          事項：【${escapeHtml(newNote.category)}】${escapeHtml(newNote.text)}<br>
+          時間：<span style="color:#DC2626;">⏰ ${escapeHtml(alarmStr)}</span><br><br>
+          若要把手機螢幕關黑放口袋，請點下方橘黃色按鈕加入手機鬧鐘：
+        `;
+        const exportBtn = document.getElementById('modal-export-ics-btn');
+        exportBtn.onclick = () => {
+          exportToSystemAlarm(newNote.id);
+          closeSysAlarmModal();
+        };
+        document.getElementById('sys-alarm-modal').style.display = 'flex';
+        speak(`已經幫您記好啦！${newNote.category}，${newNote.text}，設定 ${alarmStr} 提醒。如果螢幕要關掉，請點橘黃色按鈕加入手機鬧鐘喔！`);
+      } else {
+        speak(`已經幫您記好啦！${newNote.category}，${newNote.text}`);
+      }
     }
 
     function getNotes() {
@@ -1679,7 +1717,7 @@
       render();
     }
 
-    // 7. 渲染備忘錄清單（清爽極簡版，支援一鍵傳 LINE 給親友或自己）
+    // 7. 渲染備忘錄清單（整區字體全部放到最大＋關螢幕也會響手機鬧鐘按鈕）
     function render() {
       const listEl = document.getElementById('notes-list');
       const notes = getNotes();
@@ -1698,6 +1736,13 @@
         const lineMsg = encodeURIComponent(`【美茉莉備忘提醒】\n事項：${n.category} - ${n.text}\n時間：${n.time ? n.time : n.createdDate}`);
         const lineUrl = `https://line.me/R/msg/text/?${lineMsg}`;
 
+        const sysAlarmBtnHtml = n.time ? `
+          <button type="button" class="btn-sys-alarm" onclick="exportToSystemAlarm(${n.id})">
+            🔔 加入手機鬧鐘
+            <small>（關螢幕、放口袋也會響！）</small>
+          </button>
+        ` : '';
+
         return `
           <div class="note-card">
             <div class="note-top-row">
@@ -1705,10 +1750,8 @@
               <div class="note-alarm">${safeTime ? '⏰ ' + safeTime : '📅 ' + safeDate}</div>
             </div>
             <div class="note-text">${safeText}</div>
-            <a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="btn-line-huge">
-              📲 傳 LINE 給親友或自己
-              <small>（傳到 LINE 關螢幕也一定會響鈴留存！）</small>
-            </a>
+            ${sysAlarmBtnHtml}
+            <a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="btn-line-huge">📲 LINE親友</a>
             <div class="note-bottom-actions">
               <button class="btn-speak" onclick="speak('${safeCategory}提醒：${safeText}')">🔊 念出來聽</button>
               <button class="btn-del" onclick="deleteNote(${n.id})">🗑️ 刪除</button>
@@ -1732,11 +1775,11 @@
     }
 
     function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點右上角三個點，選加到主畫面。蘋果手機請點下方中間分享鈕，選加入主畫面。使用時，第一步，直接點選一般日常、回診、運動健身或吃藥這四個大按鈕，聽到提示音後就開始講話！第二步，把時間一起說出來，例如下午三點吃降血壓藥，電腦會自動設定鬧鐘！第三步，按綠色特大按鈕，就能傳 LINE 給親友或傳給自己留存囉！";
+      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點右上角三個點，選加到主畫面。蘋果手機請點下方中間分享鈕，選加入主畫面。使用時，第一步，直接點選一般日常、回診、運動健身或吃藥這四個大按鈕，聽到提示音後就開始講話！第二步，把時間一起說出來，例如下午三點吃降血壓藥，電腦會自動設定鬧鐘！第三步，按橘黃色按鈕加入手機鬧鐘，就算把螢幕關掉放口袋，時間到也會準時響鈴！第四步，按綠色特大按鈕，就能傳 LINE 給親友看囉！";
       speak(fullText);
     }
 
-    // 8. 即時時鐘、語音播報與 PWA 系統通知
+    // 8. 即時時鐘與網頁鬧鐘
     function updateClock() {
       const now = new Date();
       const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -1759,7 +1802,6 @@
           if (!notifiedIds.has(alarmKey)) {
             notifiedIds.add(alarmKey);
             const msg = `時間到了！提醒您，${note.category}：${note.text}`;
-            sendSystemNotification(`⏰ 美茉莉提醒（${note.category}）`, `${note.time} - ${note.text}`);
             speak(msg);
             alert(`【美茉莉提醒您】\n\n類別：${note.category}\n內容：${note.text}`);
           }

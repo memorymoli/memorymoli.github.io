@@ -1,7 +1,6 @@
-const CACHE_NAME = 'memorymoli-silver-pwa-v1';
+const CACHE_NAME = 'memorymoli-silver-pwa-v2';
 const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
+  './silver.html',
   './manifest.json'
 ];
 
@@ -37,16 +36,4 @@ self.addEventListener('fetch', (event) => {
         .catch(() => caches.match(event.request))
     );
   }
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      for (const client of clientList) {
-        if ('focus' in client) return client.focus();
-      }
-      if (clients.openWindow) return clients.openWindow('./index.html');
-    })
-  );
 });

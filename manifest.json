@@ -2,7 +2,7 @@
   "name": "美茉莉 - 銀髮備忘錄",
   "short_name": "美茉莉",
   "description": "專為銀髮長輩設計的特大字語音備忘錄與生活助手",
-  "start_url": "./index.html",
+  "start_url": "./silver.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

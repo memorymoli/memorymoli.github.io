@@ -551,7 +551,7 @@
       padding: 4px 0;
     }
 
-    /* Google 語音設鬧鐘口訣引導按鈕 */
+    /* 語音設鬧鐘口訣引導按鈕 */
     .btn-voice-alarm-tip {
       display: flex;
       flex-direction: column;
@@ -691,7 +691,7 @@
       text-wrap: balance;
     }
 
-    /* Google 語音設鬧鐘口訣卡片樣式 */
+    /* 語音設鬧鐘口訣卡片樣式 */
     .voice-phrase-box {
       background-color: #FEF3C7;
       border: 4px solid #F59E0B;
@@ -1056,11 +1056,11 @@
       <span class="official-url-badge">https://memorymoli.github.io/silver</span>
     </p>
     <p>2. <strong>零個資留存</strong>：所有紀錄僅存於您個人手機瀏覽器，本站不蒐集或上傳任何個資。</p>
-    <p>3. <strong>醫療與提醒說明</strong>：用藥與回診請遵照醫師指示；關螢幕大聲鬧鐘建議直接對手機說「Hey Google 設定鬧鐘」。</p>
+    <p>3. <strong>醫療與提醒說明</strong>：用藥與回診請遵照醫師指示；關螢幕大聲鬧鐘建議直接對手機說「Hey Google / Hey Siri 設定鬧鐘」。</p>
     <p style="margin-bottom:0;">4. <strong>外部連結免責</strong>：第三方網站內容與服務由各該機構自行負責。</p>
   </div>
 
-  <!-- Google 語音設鬧鐘教學彈窗 -->
+  <!-- 語音設鬧鐘教學彈窗（自動判斷蘋果 iPhone 或安卓手機） -->
   <div class="modal-overlay" id="voice-alarm-modal" onclick="if(event.target === this) closeVoiceAlarmModal()">
     <div class="modal-card" style="border-color: #D97706;">
       <div class="modal-title" style="color: #B45309;">🗣️ 關螢幕也會大聲叫的秘訣</div>
@@ -1068,7 +1068,7 @@
         長按手機側邊<strong>【電源鍵】</strong>（或直接喊出），對手機講這句話：
       </div>
       <div class="voice-phrase-box" id="voice-alarm-phrase">
-        「Hey Google，設定 15:00 鬧鐘」
+        「Hey Google，設定 15 點 鬧鐘」
       </div>
       <div style="font-size: clamp(20px, 6.2cqw, 25px); font-weight: 800; color: #475569; text-align: center; line-height: 1.4; margin-bottom: 14px;">
         手機內建時鐘就會自動幫您設好大聲鬧鐘，關螢幕放口袋也 100% 準時響鈴！
@@ -1153,8 +1153,8 @@
           重要吃藥或回診，請長按手機<strong>【電源鍵】</strong>，直接對手機講一句話：
         </div>
         <div class="guide-visual-box" style="color:#92400E; border-color:#F59E0B; background:#FEF3C7;">
-          「<strong>Hey Google，設定下午 3 點鬧鐘</strong>」<br>
-          （蘋果手機講「<strong>Hey Siri，設定下午 3 點鬧鐘</strong>」）
+          🤖 安卓講：「<strong>Hey Google，設定下午 3 點鬧鐘</strong>」<br>
+          🍎 蘋果講：「<strong>Hey Siri，設定下午 3 點鬧鐘</strong>」
         </div>
       </div>
 
@@ -1178,7 +1178,7 @@
   <script>
     const OFFICIAL_LINE_ID = "@052qxowa";
 
-    const STORAGE_KEY = 'senior_care_notes_v38';
+    const STORAGE_KEY = 'senior_care_notes_v39';
     let currentCategory = '一般日常';
     let selectedHour = '';
     let selectedMinute = '00';
@@ -1195,6 +1195,10 @@
     let isFbRecording = false;
     let fbRecognition = null;
     let fbPhrases = [];
+
+    // 自動辨識使用者是否為蘋果手機 (iPhone / iPad)
+    const IS_APPLE_DEVICE = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const VOICE_ASSISTANT_NAME = IS_APPLE_DEVICE ? 'Hey Siri' : 'Hey Google';
 
     // 註冊 PWA Service Worker（支援離線開啟）
     if ('serviceWorker' in navigator) {
@@ -1224,16 +1228,16 @@
       });
     }
 
-    // 開啟 Google 語音設鬧鐘口訣引導視窗
+    // 開啟語音設鬧鐘口訣引導視窗（自動對應蘋果 Hey Siri 或安卓 Hey Google）
     function openVoiceAlarmGuide(timeStr, category, text) {
       const [hh, mm] = timeStr.split(':');
       const spokenTime = mm === '00' ? `${parseInt(hh, 10)} 點` : `${parseInt(hh, 10)} 點 ${parseInt(mm, 10)} 分`;
-      const phrase = `Hey Google，設定 ${spokenTime} 鬧鐘，提醒${category}`;
+      const phrase = `${VOICE_ASSISTANT_NAME}，設定 ${spokenTime} 鬧鐘，提醒${category}`;
       document.getElementById('voice-alarm-phrase').innerText = `「${phrase}」`;
       document.getElementById('voice-alarm-modal').style.display = 'flex';
 
       const speakGuide = () => {
-        speak(`若要關螢幕也會大聲響鬧鐘，請長按手機側邊電源鍵，對手機講：Hey Google，設定 ${spokenTime} 鬧鐘，提醒${category}`);
+        speak(`若要關螢幕也會大聲響鬧鐘，請長按手機側邊電源鍵，對手機講：${phrase}`);
       };
       document.getElementById('replay-voice-phrase-btn').onclick = speakGuide;
       speakGuide();
@@ -1712,7 +1716,7 @@
       if (alarmStr) {
         const [hh, mm] = alarmStr.split(':');
         const spokenTime = mm === '00' ? `${parseInt(hh, 10)} 點` : `${parseInt(hh, 10)} 點 ${parseInt(mm, 10)} 分`;
-        speak(`已經幫您記好啦！${currentCategory}，${text}。如果需要關螢幕也大聲響鬧鐘，可以長按電源鍵對手機說：Hey Google，設定 ${spokenTime} 鬧鐘`);
+        speak(`已經幫您記好啦！${currentCategory}，${text}。如果需要關螢幕也大聲響鬧鐘，可以長按電源鍵對手機說：${VOICE_ASSISTANT_NAME}，設定 ${spokenTime} 鬧鐘`);
       } else {
         speak(`已經幫您記好啦！${currentCategory}，${text}`);
       }
@@ -1786,7 +1790,7 @@
     }
 
     function playFullVoiceGuide() {
-      const fullText = "歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點選單，選加到主畫面。蘋果手機請點下方中間分享鈕，選加入主畫面。使用時，第一步，直接點選一般日常、回診、運動健身或吃藥這四個大按鈕，聽到提示音後就開始講話！第二步，如果重要吃藥或回診，希望關螢幕也會大聲響鬧鐘，請長按手機側邊電源鍵，直接對手機說：Hey Google，設定下午三點鬧鐘！第三步，按綠色特大按鈕，就能傳 LINE 給家人或存進 Keep 筆記留存囉！";
+      const fullText = `歡迎使用美茉莉銀髮備忘錄！想把美茉莉放到手機桌面，安卓手機請點選單，選加到主畫面。蘋果手機請點下方中間分享鈕，選加入主畫面。使用時，第一步，直接點選一般日常、回診、運動健身或吃藥這四個大按鈕，聽到提示音後就開始講話！第二步，如果重要吃藥或回診，希望關螢幕也會大聲響鬧鐘，請長按手機側邊電源鍵，直接對手機說：${VOICE_ASSISTANT_NAME}，設定下午三點鬧鐘！第三步，按綠色特大按鈕，就能傳 LINE 給家人或存進 Keep 筆記留存囉！`;
       speak(fullText);
     }
 
